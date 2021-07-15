@@ -13,13 +13,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sample.models.Transaction;
 
 import java.io.IOException;
 
 public class MainFrameControl {
     private final Stage thisStage;
 
-    @FXML JFXButton new_button;
+    @FXML JFXButton new_transaction_button;
     @FXML JFXButton transaction_button;
     @FXML JFXButton report_button;
     @FXML JFXButton planning_button;
@@ -80,6 +81,14 @@ public class MainFrameControl {
     private void initialize() throws IOException {
         openTransactionView();
 
+        new_transaction_button.setOnAction(event -> {
+            try {
+                openCreateNewTransaction();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
         exit_button.setOnAction((event -> exit()));
 
         transaction_button.setOnAction(event -> {
@@ -99,6 +108,12 @@ public class MainFrameControl {
         });
 
 
+    }
+
+    private void openCreateNewTransaction() throws IOException {
+        AddTransactionControl addTransactionControl = new AddTransactionControl(this);
+        addTransactionControl.showStage();
+        addTransactionControl.setData();
     }
 
     private void openTransactionView() throws IOException {
@@ -132,4 +147,11 @@ public class MainFrameControl {
     private void exit(){
         thisStage.close();
     }
+
+
+
+    public void createNewTransaction(Transaction newTransaction){
+
+    }
+
 }
