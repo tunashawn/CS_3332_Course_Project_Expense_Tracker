@@ -10,13 +10,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import sample.models.Transaction;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class TransactionControl {
     private final Stage thisStage;
-
-    private final MainFrameControl mainFrameControl;
 
 
     @FXML
@@ -27,22 +29,23 @@ public class TransactionControl {
     private Button btnSetLayout1Text;
     @FXML private GridPane grid;
 
-    public TransactionControl(MainFrameControl controller) {
-        this.mainFrameControl = controller;
+    private MainFrameControl mainFrameControl;
+    private ArrayList<Transaction> transactionList;
+    private ArrayList<ArrayList<Transaction>> groupItemList;
+
+    public TransactionControl(MainFrameControl mainFrameControl) {
+        this.mainFrameControl = mainFrameControl;
         thisStage = new Stage();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/views/TransactionsView.fxml"));
-
             loader.setController(this);
-
             thisStage.setScene(new Scene(loader.load()));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        createGroupItemList();
     }
-    /**
-     * Show the stage that was loaded in the constructor
-     */
+
     public void showStage() {
         thisStage.show();
     }
@@ -50,10 +53,18 @@ public class TransactionControl {
     @FXML
     private void initialize() {
         populateTransactionHistory();
+        //createGroupItemList();
     }
 
-    public void setData(){
-
+    public void createGroupItemList(){
+        if (mainFrameControl.getTransactionList() != null) {
+            this.transactionList = mainFrameControl.getTransactionList();
+            System.out.println("before");
+            System.out.println(transactionList);
+            Collections.sort(transactionList);
+            System.out.println("after");
+            System.out.println(transactionList);
+        }
     }
 
 
@@ -69,7 +80,7 @@ public class TransactionControl {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("/sample/views/TransactionGroupCard.fxml"));
 
-                    TransactionGroupCardControl transactionGroupCardControl = new TransactionGroupCardControl(mainFrameControl);
+                    TransactionGroupCardControl transactionGroupCardControl = new TransactionGroupCardControl(transactionList);
                     fxmlLoader.setController(transactionGroupCardControl);
                     AnchorPane pane = fxmlLoader.load();
                     transactionGroupCardControl.setData();

@@ -1,15 +1,16 @@
 package sample.models;
 
 import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
-public class Transaction {
+public class Transaction implements Comparable<Transaction>{
     private double amount;
     private Category category;
     private String note;
-    private String date;
+    private LocalDate date;
 
-    public Transaction(double amount, Category category, String note, String date) {
+    public Transaction(double amount, Category category, String note, LocalDate date) {
         this.amount = amount;
         this.category = category;
         this.note = note;
@@ -40,11 +41,16 @@ public class Transaction {
         this.note = note;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    @Override
+    public int compareTo(Transaction o) {
+        return date.compareTo(o.getDate());
     }
 }

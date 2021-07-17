@@ -13,9 +13,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sample.models.Category;
 import sample.models.Transaction;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainFrameControl {
     private final Stage thisStage;
@@ -25,7 +27,6 @@ public class MainFrameControl {
     @FXML JFXButton report_button;
     @FXML JFXButton planning_button;
     @FXML JFXButton more_button;
-    @FXML JFXButton exit_button;
 
     @FXML
     Label title_label;
@@ -35,8 +36,11 @@ public class MainFrameControl {
 
     @FXML AnchorPane root;
 
-    private double xOffset = 0;
-    private double yOffset = 0;
+
+
+
+    private ArrayList<Transaction> transactionList = new ArrayList<>();
+    private ArrayList<Category> categories = new ArrayList<>();
 
     public MainFrameControl() {
         thisStage = new Stage();
@@ -44,29 +48,15 @@ public class MainFrameControl {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/views/MainFrame.fxml"));
             loader.setController(this);
             thisStage.setScene(new Scene(loader.load()));
-            thisStage.initStyle(StageStyle.UNDECORATED);
-
             thisStage.setTitle("Expend Tracker");
             thisStage.getIcons().add(new Image("/sample/icons/app_logo.png"));
-
-            root.setOnMousePressed(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    xOffset = event.getSceneX();
-                    yOffset = event.getSceneY();
-                }
-            });
-            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    thisStage.setX(event.getScreenX() - xOffset);
-                    thisStage.setY(event.getScreenY() - yOffset);
-                }
-            });
-
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+        categories.add(new Category("Food", new Image("sample/icons/tomato_96px.png")));
+        categories.add(new Category("Chicken", new Image("sample/icons/calendar_icon.png")));
     }
 
     public void showStage() {
@@ -89,8 +79,6 @@ public class MainFrameControl {
             }
         });
 
-        exit_button.setOnAction((event -> exit()));
-
         transaction_button.setOnAction(event -> {
             try {
                 openTransactionView();
@@ -110,10 +98,10 @@ public class MainFrameControl {
 
     }
 
+    // CREATE NEW TRANSACTION FRAME
     private void openCreateNewTransaction() throws IOException {
         AddTransactionControl addTransactionControl = new AddTransactionControl(this);
         addTransactionControl.showStage();
-        addTransactionControl.setData();
     }
 
     private void openTransactionView() throws IOException {
@@ -125,7 +113,6 @@ public class MainFrameControl {
         TransactionControl transactionControl = new TransactionControl(this);
         fxmlLoader.setController(transactionControl);
         AnchorPane pane = fxmlLoader.load();
-        transactionControl.setData();
         detail_pane.getChildren().clear();
         detail_pane.getChildren().add(pane);
     }
@@ -144,14 +131,19 @@ public class MainFrameControl {
         detail_pane.getChildren().add(pane);
     }
 
-    private void exit(){
-        thisStage.close();
+    public void createNewTransaction(Transaction t){
+        transactionList.add(t);
+    }
+    public void deleteTransaction(Transaction t){
+        transactionList.remove(t);
     }
 
+    public ArrayList<Transaction> getTransactionList(){
+        return transactionList;
+    }
 
-
-    public void createNewTransaction(Transaction newTransaction){
-
+    public ArrayList<Category> getCategories(){
+        return categories;
     }
 
 }

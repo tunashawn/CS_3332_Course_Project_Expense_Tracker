@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="60.0" maxWidth="700.0" minHeight="60.0" minWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="itemcard" maxHeight="60.0" maxWidth="700.0" minHeight="60.0" minWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane prefHeight="60.0" prefWidth="700.0">
          <columnConstraints>
