@@ -1,20 +1,24 @@
 package sample.models;
 
-import java.text.DateFormat;
+import com.google.gson.Gson;
+
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 
-public class Transaction implements Comparable<Transaction>{
+public class Transaction implements Comparable<Transaction>, Serializable {
     private double amount;
-    private Category category;
+    private String category;
     private String note;
-    private LocalDate date;
+    private String date;
+    private int type;
 
-    public Transaction(double amount, Category category, String note, LocalDate date) {
+    public Transaction(double amount, int type, String category, String note, LocalDate date) {
         this.amount = amount;
+        this.type = type;
         this.category = category;
         this.note = note;
-        this.date = date;
+        this.date = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));;
     }
 
     public double getAmount() {
@@ -25,11 +29,11 @@ public class Transaction implements Comparable<Transaction>{
         this.amount = amount;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
@@ -41,16 +45,38 @@ public class Transaction implements Comparable<Transaction>{
         this.note = note;
     }
 
-    public LocalDate getDate() {
+    public String getDateAsString(){
         return date;
+    }
+    public LocalDate getDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return LocalDate.parse(this.date, formatter);
     }
 
     public void setDate(LocalDate date) {
-        this.date = date;
+        this.date = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     @Override
     public int compareTo(Transaction o) {
-        return date.compareTo(o.getDate());
+        return getDate().compareTo(o.getDate());
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "amount=" + amount +
+                ", category='" + category + '\'' +
+                ", note='" + note + '\'' +
+                ", date='" + date + '\'' +
+                '}';
     }
 }

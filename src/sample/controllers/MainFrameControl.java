@@ -1,22 +1,18 @@
 package sample.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import sample.models.Category;
 import sample.models.Transaction;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class MainFrameControl {
@@ -42,7 +38,7 @@ public class MainFrameControl {
     private ArrayList<Transaction> transactionList = new ArrayList<>();
     private ArrayList<Category> categories = new ArrayList<>();
 
-    public MainFrameControl() {
+    public MainFrameControl() throws IOException {
         thisStage = new Stage();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/views/MainFrame.fxml"));
@@ -53,6 +49,7 @@ public class MainFrameControl {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
 
         categories.add(new Category("Food", new Image("sample/icons/tomato_96px.png")));
@@ -69,8 +66,16 @@ public class MainFrameControl {
      */
     @FXML
     private void initialize() throws IOException {
+        deserializeTransactions();
         openTransactionView();
 
+        thisStage.setOnCloseRequest(event -> {
+            try {
+                serializeTransactions();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         new_transaction_button.setOnAction(event -> {
             try {
                 openCreateNewTransaction();
@@ -109,11 +114,10 @@ public class MainFrameControl {
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/sample/views/TransactionsView.fxml"));
-
         TransactionControl transactionControl = new TransactionControl(this);
         fxmlLoader.setController(transactionControl);
         AnchorPane pane = fxmlLoader.load();
-        detail_pane.getChildren().clear();
+        //detail_pane.getChildren().clear();
         detail_pane.getChildren().add(pane);
     }
 
@@ -131,6 +135,39 @@ public class MainFrameControl {
         detail_pane.getChildren().add(pane);
     }
 
+    private void serializeTransactions() throws IOException {
+        try {
+            FileOutputStream file = new FileOutputStream("Transaction Record.ser");
+            ObjectOutputStream writer = new ObjectOutputStream(file);
+            for (Transaction obj : transactionList) {
+                writer.writeObject(obj);
+            }
+            writer.close();
+            file.close();
+        } catch (Exception ex) {
+            System.err.println("failed to write " + "Transaction Record.ser" + ", "+ ex);
+        }
+    }
+
+    private void deserializeTransactions() throws IOException {
+        try {
+            FileInputStream file = new FileInputStream("Transaction Record.ser");
+            ObjectInputStream reader = new ObjectInputStream(file);
+            while (true) {
+                try {
+                    Transaction obj = (Transaction) reader.readObject();
+                    transactionList.add(obj);
+                    System.out.println(obj);
+                } catch (Exception ex) {
+                    System.err.println("end of reader file ");
+                    break;
+                }
+            }
+        } catch (Exception ex) {
+            System.err.println("failed to read " + "Transaction Record.ser" + ", "+ ex);
+        }
+    }
+
     public void createNewTransaction(Transaction t){
         transactionList.add(t);
     }
@@ -145,5 +182,6 @@ public class MainFrameControl {
     public ArrayList<Category> getCategories(){
         return categories;
     }
+
 
 }

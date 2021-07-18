@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import sample.models.Category;
@@ -26,7 +27,11 @@ public class AddTransactionControl {
     @FXML private TextField note_textfield;
     @FXML private DatePicker date_datepicker;
     @FXML private AnchorPane root;
+    @FXML private RadioButton income, expense;
+    @FXML private Label warning;
+    @FXML private ImageView category_icon;
 
+    private int type = -1;
 
 
     private MainFrameControl mainFrameControl;
@@ -55,32 +60,43 @@ public class AddTransactionControl {
      */
     @FXML
     private void initialize() throws IOException {
+        warning.setVisible(false);
         cancel_button.setOnAction(event -> setCancel_button());
         save_button.setOnAction(event -> setSave_button());
 
         for (Category i: mainFrameControl.getCategories()){
             category_combobox.getItems().add(i.getName());
         }
+        expense.setSelected(true);
+
+        income.setOnAction(event -> {
+            type = 1;
+            expense.setSelected(false);
+        });
+        expense.setOnAction(event -> {
+            type = -1;
+            income.setSelected(false);
+        });
     }
 
     private void setSave_button(){
         try{
             int amount = Integer.parseInt(amount_textfield.getText());
-            Category category = null;
+            String category = null;
             for (Category i: mainFrameControl.getCategories()){
                 if (i.getName().equals(category_combobox.getValue())){
-                    category = i;
+                    category = i.getName();
                     break;
                 }
             }
             String note = note_textfield.getText();
             LocalDate date = date_datepicker.getValue();
-            Transaction newTransaction = new Transaction(amount, category, note, date);
+            Transaction newTransaction = new Transaction(amount, type, category, note, date);
             // Now create new transaction
             mainFrameControl.createNewTransaction(newTransaction);
             thisStage.close();
         } catch (NumberFormatException ignored) {
-
+            warning.setVisible(true);
         }
 
     }

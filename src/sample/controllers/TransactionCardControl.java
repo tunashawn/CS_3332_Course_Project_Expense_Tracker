@@ -1,34 +1,25 @@
 package sample.controllers;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import sample.models.Transaction;
-
-import java.beans.EventHandler;
-import java.io.IOException;
-import java.util.ArrayList;
 
 
 public class TransactionCardControl {
     private final Stage thisStage;
     @FXML
     AnchorPane itemcard;
+    @FXML private ImageView icon;
+    @FXML private Label title, note, price;
 
-    private ArrayList<Transaction> transactionList;
-    public TransactionCardControl(ArrayList<Transaction> transactionList) {
-        this.transactionList= transactionList;
+    private Transaction transaction;
+    public TransactionCardControl(Transaction transaction) {
+        this.transaction= transaction;
         thisStage = new Stage();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/views/TransactionCard.fxml"));
-            loader.setController(this);
-            thisStage.setScene(new Scene(loader.load()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void showStage() {
@@ -37,6 +28,10 @@ public class TransactionCardControl {
 
     @FXML
     private void initialize() {
+        title.setText(transaction.getCategory());
+        note.setText(transaction.getNote());
+        price.setText(String.valueOf(transaction.getAmount()));
+        icon.setImage(new Image("sample/categories/food.png"));
         itemcard.setOnMouseClicked(event -> clickOnCard());
     }
 

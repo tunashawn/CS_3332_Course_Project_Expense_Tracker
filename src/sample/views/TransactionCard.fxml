@@ -28,7 +28,7 @@
          <children>
             <HBox alignment="CENTER">
                <children>
-                  <ImageView fitHeight="40.0" fitWidth="40.0">
+                  <ImageView fx:id="icon" fitHeight="40.0" fitWidth="40.0">
                      <image>
                         <Image url="@../icons/tomato_96px.png" />
                      </image>
@@ -37,7 +37,7 @@
             </HBox>
             <VBox alignment="CENTER_LEFT" GridPane.columnIndex="1">
                <children>
-                  <Label fx:id="day" text="Foods &amp; Beverages">
+                  <Label fx:id="title" text="Foods &amp; Beverages">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
@@ -45,7 +45,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="date" text="Tomato">
+                  <Label fx:id="note" text="Tomato">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
@@ -70,7 +70,7 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="2">
                <children>
-                  <Label fx:id="total" style="-fx-text-fill: red;" text="20,000">
+                  <Label fx:id="price" style="-fx-text-fill: red;" text="20,000">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>

@@ -27,7 +27,7 @@
                <children>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label fx:id="day_number" alignment="CENTER" contentDisplay="CENTER" maxHeight="45.0" maxWidth="45.0" minWidth="45.0" prefHeight="29.0" prefWidth="45.0" text="24" textAlignment="CENTER">
+                        <Label fx:id="day_of_month" alignment="CENTER" contentDisplay="CENTER" maxHeight="45.0" maxWidth="45.0" minWidth="45.0" prefHeight="29.0" prefWidth="45.0" text="24" textAlignment="CENTER">
                            <font>
                               <Font name="System Bold" size="35.0" />
                            </font>
@@ -36,7 +36,7 @@
                   </HBox>
                   <VBox alignment="CENTER_LEFT" GridPane.columnIndex="1">
                      <children>
-                        <Label fx:id="day" text="Wednesday">
+                        <Label fx:id="day_of_week" text="Wednesday">
                            <VBox.margin>
                               <Insets left="10.0" />
                            </VBox.margin>
@@ -44,7 +44,7 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Label fx:id="date" text="June 2021">
+                        <Label fx:id="month_year" text="June 2021">
                            <VBox.margin>
                               <Insets left="10.0" />
                            </VBox.margin>
