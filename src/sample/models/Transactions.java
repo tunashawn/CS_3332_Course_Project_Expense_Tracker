@@ -1,19 +1,17 @@
 package sample.models;
 
-import com.google.gson.Gson;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Transaction implements Comparable<Transaction>, Serializable {
+public class Transactions implements Comparable<Transactions>, Serializable {
     private double amount;
     private String category;
     private String note;
     private String date;
     private int type;
 
-    public Transaction(double amount, int type, String category, String note, LocalDate date) {
+    public Transactions(double amount, int type, String category, String note, LocalDate date) {
         this.amount = amount;
         this.type = type;
         this.category = category;
@@ -66,7 +64,7 @@ public class Transaction implements Comparable<Transaction>, Serializable {
     }
 
     @Override
-    public int compareTo(Transaction o) {
+    public int compareTo(Transactions o) {
         return getDate().compareTo(o.getDate());
     }
 
@@ -77,6 +75,7 @@ public class Transaction implements Comparable<Transaction>, Serializable {
                 ", category='" + category + '\'' +
                 ", note='" + note + '\'' +
                 ", date='" + date + '\'' +
+                ", type=" + type +
                 '}';
     }
 }

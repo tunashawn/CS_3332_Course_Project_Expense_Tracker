@@ -4,13 +4,16 @@ import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import sample.models.Category;
-import sample.models.Transaction;
+import sample.models.Categories;
+import sample.models.Transactions;
+import sample.models.Wallets;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -18,12 +21,14 @@ import java.util.ArrayList;
 public class MainFrameControl {
     private final Stage thisStage;
 
+    @FXML Button wallet_button;
     @FXML JFXButton new_transaction_button;
     @FXML JFXButton transaction_button;
     @FXML JFXButton report_button;
     @FXML JFXButton planning_button;
     @FXML JFXButton more_button;
-
+    @FXML
+    ImageView wallet_icon;
     @FXML
     Label title_label;
     @FXML AnchorPane content_panel;
@@ -32,11 +37,11 @@ public class MainFrameControl {
 
     @FXML AnchorPane root;
 
+    private ArrayList<Wallets> walletList = new ArrayList<>();
+    private ArrayList<Transactions> transactionsOfSelectedWallet = new ArrayList<>();
+    private ArrayList<Categories> categories = new ArrayList<>();
+    private Wallets selectedWallet;
 
-
-
-    private ArrayList<Transaction> transactionList = new ArrayList<>();
-    private ArrayList<Category> categories = new ArrayList<>();
 
     public MainFrameControl() throws IOException {
         thisStage = new Stage();
@@ -52,8 +57,8 @@ public class MainFrameControl {
 
 
 
-        categories.add(new Category("Food", new Image("sample/icons/tomato_96px.png")));
-        categories.add(new Category("Chicken", new Image("sample/icons/calendar_icon.png")));
+        categories.add(new Categories("Food", new Image("sample/icons/tomato_96px.png")));
+        categories.add(new Categories("Chicken", new Image("sample/icons/calendar_icon.png")));
     }
 
     public void showStage() {
@@ -65,123 +70,142 @@ public class MainFrameControl {
      * The initialize() method allows you set setup your scene, adding actions, configuring nodes, etc.
      */
     @FXML
-    private void initialize() throws IOException {
+    private void initialize() {
+
         deserializeTransactions();
+
         openTransactionView();
 
-        thisStage.setOnCloseRequest(event -> {
-            try {
-                serializeTransactions();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        new_transaction_button.setOnAction(event -> {
-            try {
-                openCreateNewTransaction();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        thisStage.setOnCloseRequest(event -> serializeTransactions());
 
-        transaction_button.setOnAction(event -> {
-            try {
-                openTransactionView();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        wallet_button.setOnAction(event -> openMyWallets());
 
-        report_button.setOnAction(event -> {
-            try {
-                openReportView();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        new_transaction_button.setOnAction(event -> openCreateNewTransaction());
+
+        transaction_button.setOnAction(event -> openTransactionView());
+
+        report_button.setOnAction(event -> openReportView());
 
 
     }
 
+    private void openMyWallets() {
+        try {
+            title_label.setText("My Wallets");
+
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/sample/views/MyWalletsView.fxml"));
+            MyWalletControl myWalletControl = new MyWalletControl(this);
+            fxmlLoader.setController(myWalletControl);
+            AnchorPane pane = fxmlLoader.load();
+            detail_pane.getChildren().clear();
+            detail_pane.getChildren().add(pane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     // CREATE NEW TRANSACTION FRAME
-    private void openCreateNewTransaction() throws IOException {
+    private void openCreateNewTransaction() {
         AddTransactionControl addTransactionControl = new AddTransactionControl(this);
         addTransactionControl.showStage();
     }
 
-    private void openTransactionView() throws IOException {
-        title_label.setText("Transactions");
+    private void openTransactionView() {
+        try {
+            title_label.setText("Transactions");
 
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/sample/views/TransactionsView.fxml"));
-        TransactionControl transactionControl = new TransactionControl(this);
-        fxmlLoader.setController(transactionControl);
-        AnchorPane pane = fxmlLoader.load();
-        //detail_pane.getChildren().clear();
-        detail_pane.getChildren().add(pane);
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/sample/views/TransactionsView.fxml"));
+            TransactionControl transactionControl = new TransactionControl(this);
+            fxmlLoader.setController(transactionControl);
+            AnchorPane pane = fxmlLoader.load();
+            detail_pane.getChildren().clear();
+            detail_pane.getChildren().add(pane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void openReportView() throws IOException {
-        title_label.setText("Reports");
+    private void openReportView() {
+        try {
+            title_label.setText("Reports");
 
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/sample/views/ReportView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/sample/views/ReportView.fxml"));
 
-        ReportFrameControl reportFrameControl = new ReportFrameControl(this);
-        fxmlLoader.setController(reportFrameControl);
-        AnchorPane pane = fxmlLoader.load();
-        reportFrameControl.setData();
-        detail_pane.getChildren().clear();
-        detail_pane.getChildren().add(pane);
+            ReportFrameControl reportFrameControl = new ReportFrameControl(this);
+            fxmlLoader.setController(reportFrameControl);
+            AnchorPane pane = fxmlLoader.load();
+            reportFrameControl.setData();
+            detail_pane.getChildren().clear();
+            detail_pane.getChildren().add(pane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void serializeTransactions() throws IOException {
+
+
+
+    private void serializeTransactions() {
         try {
             FileOutputStream file = new FileOutputStream("Transaction Record.ser");
             ObjectOutputStream writer = new ObjectOutputStream(file);
-            for (Transaction obj : transactionList) {
+            for (Wallets obj : walletList) {
                 writer.writeObject(obj);
             }
             writer.close();
             file.close();
+            System.out.println("Serializing completed");
         } catch (Exception ex) {
             System.err.println("failed to write " + "Transaction Record.ser" + ", "+ ex);
         }
     }
 
-    private void deserializeTransactions() throws IOException {
+    private void deserializeTransactions() {
         try {
             FileInputStream file = new FileInputStream("Transaction Record.ser");
             ObjectInputStream reader = new ObjectInputStream(file);
             while (true) {
                 try {
-                    Transaction obj = (Transaction) reader.readObject();
-                    transactionList.add(obj);
-                    System.out.println(obj);
+                    Wallets obj = (Wallets) reader.readObject();
+                    walletList.add(obj);
+
                 } catch (Exception ex) {
                     System.err.println("end of reader file ");
                     break;
                 }
             }
+            walletList.forEach(System.out::println);
         } catch (Exception ex) {
             System.err.println("failed to read " + "Transaction Record.ser" + ", "+ ex);
         }
     }
 
-    public void createNewTransaction(Transaction t){
-        transactionList.add(t);
-    }
-    public void deleteTransaction(Transaction t){
-        transactionList.remove(t);
+
+
+    public void createNewTransaction(Transactions t){
+        transactionsOfSelectedWallet.add(t);
     }
 
-    public ArrayList<Transaction> getTransactionList(){
-        return transactionList;
+    public void deleteTransaction(Transactions t){
+        transactionsOfSelectedWallet.remove(t);
     }
 
-    public ArrayList<Category> getCategories(){
+    public ArrayList<Transactions> getTransactionsOfSelectedWallet(){
+        return transactionsOfSelectedWallet;
+    }
+
+    public ArrayList<Categories> getCategories(){
         return categories;
     }
 
+    public void setSelectedWallet(Wallets w){
+        selectedWallet = w;
+    }
+
+    public void addNewWallet(Wallets w){
+        walletList.add(w);
+    }
 
 }

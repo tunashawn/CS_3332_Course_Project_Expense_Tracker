@@ -1,5 +1,6 @@
 package sample.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -9,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import sample.models.Transaction;
+import sample.models.Transactions;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,17 +20,16 @@ public class TransactionControl {
     private final Stage thisStage;
 
 
-    @FXML
-    private Label lblFromController1;
-    @FXML
-    private TextField txtToFirstController;
-    @FXML
-    private Button btnSetLayout1Text;
+    @FXML private Label lblFromController1;
+    @FXML private TextField txtToFirstController;
+    @FXML private Button btnSetLayout1Text;
     @FXML private GridPane grid;
+    @FXML private Label wallet_name, balance_label, month_label, income, expense, total_label;
+    @FXML private JFXButton previous_month, next_month;
 
     private MainFrameControl mainFrameControl;
-    private ArrayList<Transaction> transactionList;
-    private ArrayList<ArrayList<Transaction>> groupItemList = new ArrayList<ArrayList<Transaction>>();
+    private ArrayList<Transactions> transactionList;
+    private ArrayList<ArrayList<Transactions>> groupItemList = new ArrayList<ArrayList<Transactions>>();
 
     public TransactionControl(MainFrameControl mainFrameControl) {
         this.mainFrameControl = mainFrameControl;
@@ -47,14 +47,14 @@ public class TransactionControl {
     }
 
     public void createGroupItemList(){
-        if (mainFrameControl.getTransactionList() != null && mainFrameControl.getTransactionList().size() > 0) {
-            this.transactionList = mainFrameControl.getTransactionList();
+        if (mainFrameControl.getTransactionsOfSelectedWallet() != null && mainFrameControl.getTransactionsOfSelectedWallet().size() > 0) {
+            this.transactionList = mainFrameControl.getTransactionsOfSelectedWallet();
 
             transactionList.sort(Collections.reverseOrder());
 
             String date = transactionList.get(0).getDateAsString();
-            ArrayList<Transaction> list = new ArrayList<>();
-            for (Transaction t : transactionList) {
+            ArrayList<Transactions> list = new ArrayList<>();
+            for (Transactions t : transactionList) {
                 if (!t.getDateAsString().equals(date)) {
                     groupItemList.add(list);
                     list = new ArrayList<>();
@@ -76,14 +76,13 @@ public class TransactionControl {
             String date = transactionList.get(0).getDateAsString();
             int column = 0;
             int row = 1;
-            for (ArrayList<Transaction> g : groupItemList) {
+            for (ArrayList<Transactions> g : groupItemList) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/sample/views/TransactionGroupCard.fxml"));
 
                 TransactionGroupCardControl transactionGroupCardControl = new TransactionGroupCardControl(g);
                 fxmlLoader.setController(transactionGroupCardControl);
                 AnchorPane pane = fxmlLoader.load();
-                transactionGroupCardControl.setData();
 
                 if (column == 1) {
                     column = 0;
@@ -91,7 +90,7 @@ public class TransactionControl {
                 }
 
                 grid.add(pane, column++, row);
-                GridPane.setMargin(pane, new Insets(15, 0, 5, 200));
+                GridPane.setMargin(pane, new Insets(15, 0, 5, 100));
             }
         }
     }

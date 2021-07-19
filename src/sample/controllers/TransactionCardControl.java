@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import sample.models.Transaction;
+import sample.models.Transactions;
 
 
 public class TransactionCardControl {
@@ -16,8 +16,8 @@ public class TransactionCardControl {
     @FXML private ImageView icon;
     @FXML private Label title, note, price;
 
-    private Transaction transaction;
-    public TransactionCardControl(Transaction transaction) {
+    private Transactions transaction;
+    public TransactionCardControl(Transactions transaction) {
         this.transaction= transaction;
         thisStage = new Stage();
     }
@@ -30,7 +30,10 @@ public class TransactionCardControl {
     private void initialize() {
         title.setText(transaction.getCategory());
         note.setText(transaction.getNote());
+        if (transaction.getType() == 1)
+            price.setStyle("-fx-text-fill: green");
         price.setText(String.valueOf(transaction.getAmount()));
+
         icon.setImage(new Image("sample/categories/food.png"));
         itemcard.setOnMouseClicked(event -> clickOnCard());
     }

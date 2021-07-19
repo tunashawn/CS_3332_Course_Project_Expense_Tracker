@@ -13,20 +13,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="itemcard" maxHeight="60.0" maxWidth="700.0" minHeight="60.0" minWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="itemcard" maxHeight="60.0" maxWidth="500.0" minHeight="60.0" minWidth="500.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <GridPane prefHeight="60.0" prefWidth="700.0">
+      <GridPane prefHeight="60.0" prefWidth="500.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="60.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="420.0" minWidth="10.0" prefWidth="288.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="260.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="65.0" minWidth="100.0" prefWidth="65.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="420.0" minWidth="10.0" prefWidth="226.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="153.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="78.0">
                <children>
                   <ImageView fx:id="icon" fitHeight="40.0" fitWidth="40.0">
                      <image>
@@ -42,10 +42,10 @@
                         <Insets left="10.0" />
                      </VBox.margin>
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="note" text="Tomato">
+                  <Label fx:id="note" maxWidth="200.0" prefHeight="18.0" prefWidth="200.0" text="Tomato">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
@@ -54,12 +54,12 @@
             </VBox>
             <HBox alignment="CENTER" prefWidth="119.0" GridPane.columnIndex="3">
                <children>
-                  <JFXButton alignment="CENTER" contentDisplay="CENTER" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0">
+                  <JFXButton alignment="CENTER" contentDisplay="CENTER" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" prefHeight="30.0" prefWidth="29.0">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                      <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="25.0">
+                        <ImageView fitHeight="20.0" fitWidth="20.0">
                            <image>
                               <Image url="@../icons/trash_52px.png" />
                            </image>
@@ -70,7 +70,7 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="2">
                <children>
-                  <Label fx:id="price" style="-fx-text-fill: red;" text="20,000">
+                  <Label fx:id="price" style="-fx-text-fill: red;" text="20,000,000">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>

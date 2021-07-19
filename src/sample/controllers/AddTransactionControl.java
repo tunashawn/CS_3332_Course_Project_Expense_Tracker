@@ -10,8 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import sample.models.Category;
-import sample.models.Transaction;
+import sample.models.Categories;
+import sample.models.Transactions;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -64,7 +64,7 @@ public class AddTransactionControl {
         cancel_button.setOnAction(event -> setCancel_button());
         save_button.setOnAction(event -> setSave_button());
 
-        for (Category i: mainFrameControl.getCategories()){
+        for (Categories i: mainFrameControl.getCategories()){
             category_combobox.getItems().add(i.getName());
         }
         expense.setSelected(true);
@@ -81,9 +81,9 @@ public class AddTransactionControl {
 
     private void setSave_button(){
         try{
-            int amount = Integer.parseInt(amount_textfield.getText());
+            double amount = Double.parseDouble(amount_textfield.getText());
             String category = null;
-            for (Category i: mainFrameControl.getCategories()){
+            for (Categories i: mainFrameControl.getCategories()){
                 if (i.getName().equals(category_combobox.getValue())){
                     category = i.getName();
                     break;
@@ -91,9 +91,10 @@ public class AddTransactionControl {
             }
             String note = note_textfield.getText();
             LocalDate date = date_datepicker.getValue();
-            Transaction newTransaction = new Transaction(amount, type, category, note, date);
+            Transactions newTransaction = new Transactions(amount, type, category, note, date);
             // Now create new transaction
             mainFrameControl.createNewTransaction(newTransaction);
+            System.out.println(newTransaction);
             thisStage.close();
         } catch (NumberFormatException ignored) {
             warning.setVisible(true);

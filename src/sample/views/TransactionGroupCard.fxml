@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxWidth="700.0" minWidth="700.0" prefWidth="400.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxWidth="500.0" minWidth="500.0" prefWidth="400.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="-11.0" maxWidth="700.0" minWidth="700.0" prefHeight="120.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -19,7 +19,7 @@
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="90.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="180.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="405.0" minWidth="10.0" prefWidth="309.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="80.0" prefWidth="181.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="181.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
@@ -53,7 +53,7 @@
                   </VBox>
                   <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="2">
                      <children>
-                        <Label fx:id="total" text="-430,000">
+                        <Label fx:id="total" alignment="CENTER_RIGHT" contentDisplay="CENTER" text="-430,000">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
@@ -65,9 +65,9 @@
                   </HBox>
                </children>
             </GridPane>
-            <VBox alignment="TOP_CENTER" maxWidth="700.0">
+            <VBox alignment="TOP_CENTER" maxWidth="500.0">
                <children>
-                  <GridPane fx:id="grid" maxWidth="700.0" minWidth="700.0">
+                  <GridPane fx:id="grid" maxWidth="500.0" minWidth="500.0">
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>

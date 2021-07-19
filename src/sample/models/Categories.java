@@ -2,11 +2,11 @@ package sample.models;
 
 import javafx.scene.image.Image;
 
-public class Category {
+public class Categories {
     private String name;
     private Image icon;
 
-    public Category(String name, Image icon) {
+    public Categories(String name, Image icon) {
         this.name = name;
         this.icon = icon;
     }

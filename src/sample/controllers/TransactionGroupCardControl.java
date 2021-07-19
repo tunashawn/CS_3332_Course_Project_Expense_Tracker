@@ -7,10 +7,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import sample.models.Transaction;
+import sample.models.Transactions;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TransactionGroupCardControl {
     private final Stage thisStage;
@@ -18,9 +19,9 @@ public class TransactionGroupCardControl {
     @FXML private GridPane grid;
     @FXML private Label day_of_month, day_of_week, month_year, total;
 
-    private ArrayList<Transaction> transactionsInADay;
+    private ArrayList<Transactions> transactionsInADay;
 
-    public TransactionGroupCardControl(ArrayList<Transaction> transactionList) {
+    public TransactionGroupCardControl(ArrayList<Transactions> transactionList) {
         this.transactionsInADay = transactionList;
         thisStage = new Stage();
     }
@@ -31,10 +32,17 @@ public class TransactionGroupCardControl {
 
     @FXML
     private void initialize() {
+        calculateTotal();
         populateTransactionGroup();
     }
 
-    public void setData(){
+    public void calculateTotal(){
+        double total = 0;
+        for (Transactions t : transactionsInADay) {
+            total += t.getAmount() * t.getType();
+        }
+
+        this.total.setText(String.valueOf(total));
 
     }
 
@@ -47,13 +55,14 @@ public class TransactionGroupCardControl {
             day_of_month.setText(String.valueOf(transactionsInADay.get(0).getDate().getDayOfMonth()));
             day_of_week.setText(String.valueOf(transactionsInADay.get(0).getDate().getDayOfWeek()));
             String monYear = String.valueOf(transactionsInADay.get(0).getDate().getMonth());
-            monYear += String.valueOf(transactionsInADay.get(0).getDate().getYear());
+            monYear += " " + String.valueOf(transactionsInADay.get(0).getDate().getYear());
             month_year.setText(monYear);
             int column = 0;
             int row = 1;
             int number_of_item = 3;
             try {
-                for (Transaction t : transactionsInADay) {
+                Collections.reverse(transactionsInADay);
+                for (Transactions t : transactionsInADay) {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("/sample/views/TransactionCard.fxml"));
 
