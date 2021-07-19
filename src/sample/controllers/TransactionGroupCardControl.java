@@ -1,0 +1,100 @@
+package sample.controllers;
+
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import sample.models.Transactions;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class TransactionGroupCardControl {
+    private final Stage thisStage;
+
+    @FXML private GridPane grid;
+    @FXML private Label day_of_month, day_of_week, month_year, total;
+
+    private ArrayList<Transactions> transactionsInADay;
+
+    public TransactionGroupCardControl(ArrayList<Transactions> transactionList) {
+        this.transactionsInADay = transactionList;
+        thisStage = new Stage();
+    }
+
+    public void showStage() {
+        thisStage.showAndWait();
+    }
+
+    @FXML
+    private void initialize() {
+        calculateTotal();
+        populateTransactionGroup();
+    }
+
+    public void calculateTotal(){
+        double total = 0;
+        for (Transactions t : transactionsInADay) {
+            total += t.getAmount() * t.getType();
+        }
+
+        this.total.setText(String.valueOf(total));
+
+    }
+
+
+    /**
+     * Populate My Order pane
+     */
+    private void populateTransactionGroup() {
+        if (transactionsInADay != null && transactionsInADay.size() > 0){
+            day_of_month.setText(String.valueOf(transactionsInADay.get(0).getDate().getDayOfMonth()));
+            day_of_week.setText(String.valueOf(transactionsInADay.get(0).getDate().getDayOfWeek()));
+            String monYear = String.valueOf(transactionsInADay.get(0).getDate().getMonth());
+            monYear += " " + String.valueOf(transactionsInADay.get(0).getDate().getYear());
+            month_year.setText(monYear);
+            int column = 0;
+            int row = 1;
+            int number_of_item = 3;
+            try {
+                Collections.reverse(transactionsInADay);
+                for (Transactions t : transactionsInADay) {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("/sample/views/TransactionCard.fxml"));
+
+                    TransactionCardControl transactionCardControl = new TransactionCardControl(t);
+                    fxmlLoader.setController(transactionCardControl);
+                    AnchorPane pane = fxmlLoader.load();
+                    transactionCardControl.setData();
+
+                    if (column == 1) {
+                        column = 0;
+                        ++row;
+                    }
+
+                    grid.add(pane, column++, row);
+                    GridPane.setMargin(pane, new Insets(0));
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+}

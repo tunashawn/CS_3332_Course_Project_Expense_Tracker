@@ -2,11 +2,7 @@ package sample;
 
 import javafx.application.Application;
 
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import sample.controllers.MainFrameControl;
 
 public class Main extends Application {
@@ -17,11 +13,7 @@ public class Main extends Application {
         MainFrameControl mainFrameControl = new MainFrameControl();
         mainFrameControl.showStage();
 
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-
     }
-
-
 
     public static void main(String[] args) {
         launch(args);
