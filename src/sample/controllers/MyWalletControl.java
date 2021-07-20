@@ -25,16 +25,15 @@ public class MyWalletControl {
 
     public MyWalletControl(MainFrameControl mainFrameControl, ArrayList<Wallets> walletList) {
         this.mainFrameControl = mainFrameControl;
-        if (walletList != null)
-            this.walletList = walletList;
+        this.walletList = walletList;
     }
 
     @FXML
     private void initialize() throws IOException {
-        if (mainFrameControl.getSelectedWallet() != null)
+        if (walletList != null && walletList.size() > 0) {
             setSelected_panel(mainFrameControl.getSelectedWallet());
-        if (walletList != null)
             populateWalletList();
+        }
 
         new_wallet_button.setOnAction(event -> setNew_wallet_button());
     }
@@ -68,40 +67,45 @@ public class MyWalletControl {
     }
 
     public void setSelected_panel(Wallets w) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/sample/views/WalletCardView.fxml"));
-
-        WalletCardControl walletCardControl = new WalletCardControl(w, this);
-        fxmlLoader.setController(walletCardControl);
-        AnchorPane pane = fxmlLoader.load();
-
         selected_panel.getChildren().clear();
-        selected_panel.getChildren().add(pane);
+        if (w != null) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/sample/views/WalletCardView.fxml"));
 
-        mainFrameControl.setSelectedWallet(w);
+            WalletCardControl walletCardControl = new WalletCardControl(w, this);
+            fxmlLoader.setController(walletCardControl);
+            AnchorPane pane = fxmlLoader.load();
+
+            selected_panel.getChildren().clear();
+            selected_panel.getChildren().add(pane);
+
+            mainFrameControl.setSelectedWallet(w);
+        }
     }
 
 
     public void populateWalletList() throws IOException {
         grid.getChildren().clear();
-        if (walletList != null && walletList.size() > 0){
+        if (walletList != null){
             int column = 0;
             int row = 1;
             for (Wallets w : walletList) {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/sample/views/WalletCardView.fxml"));
+                if (w != null) {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("/sample/views/WalletCardView.fxml"));
 
-                WalletCardControl walletCardControl = new WalletCardControl(w, this);
-                fxmlLoader.setController(walletCardControl);
-                AnchorPane pane = fxmlLoader.load();
+                    WalletCardControl walletCardControl = new WalletCardControl(w, this);
+                    fxmlLoader.setController(walletCardControl);
+                    AnchorPane pane = fxmlLoader.load();
 
-                if (column == 1) {
-                    column = 0;
-                    ++row;
+                    if (column == 1) {
+                        column = 0;
+                        ++row;
+                    }
+
+                    grid.add(pane, column++, row);
+                    GridPane.setMargin(pane, new Insets(15, 0, 0, 0));
                 }
-
-                grid.add(pane, column++, row);
-                GridPane.setMargin(pane, new Insets(15, 0, 0, 0));
             }
         }
     }
@@ -111,10 +115,17 @@ public class MyWalletControl {
     }
 
     public void deleteAWallet(Wallets w) throws IOException {
-        walletList.remove(w);
-        if (mainFrameControl.getSelectedWallet().equals(w)) {
+
+        selected_panel.getChildren().clear();
+
+        if (mainFrameControl.getSelectedWallet().equals(w) && walletList.size() > 1) {
+            walletList.remove(w);
             mainFrameControl.setSelectedWallet(walletList.get(0));
-            setSelected_panel(walletList.get(0));
+            setSelected_panel(mainFrameControl.getSelectedWallet());
+        } else{
+            walletList.remove(w);
+            setSelected_panel(null);
+            mainFrameControl.setSelectedWallet(null);
         }
         clearDetailPanel();
         populateWalletList();
