@@ -7,20 +7,21 @@ import java.util.ArrayList;
 public class Wallets implements Serializable {
     private String name;
     private String icon_name;
+    private String currency;
     private double balance;
     private double total_income;
     private double total_expense;
     private ArrayList<Transactions> transactionList = new ArrayList<>();
 
-    public Wallets(String name, String icon_name, double balance, double total_income, double total_expense, ArrayList<Transactions> transactionList) {
+    public Wallets(String name, String icon_name, String currency, double balance, double total_income, double total_expense, ArrayList<Transactions> transactionList) {
         this.name = name;
         this.icon_name = icon_name;
+        this.currency = currency;
         this.balance = balance;
         this.total_income = total_income;
         this.total_expense = total_expense;
         this.transactionList = transactionList;
     }
-
 
     public String getName() {
         return name;
@@ -36,6 +37,14 @@ public class Wallets implements Serializable {
 
     public void setIcon_name(String icon_name) {
         this.icon_name = icon_name;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     public double getBalance() {
@@ -78,10 +87,12 @@ public class Wallets implements Serializable {
         }
         return "Wallets{" +
                 "name='" + name + '\'' +
+                ", icon_name='" + icon_name + '\'' +
+                ", currency='" + currency + '\'' +
                 ", balance=" + balance +
                 ", total_income=" + total_income +
                 ", total_expense=" + total_expense +
-                ", transactionList=" + tran +
+                ", transactionList=" + transactionList +
                 '}';
     }
 }

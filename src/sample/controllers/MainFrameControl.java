@@ -95,7 +95,7 @@ public class MainFrameControl {
 
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/sample/views/MyWalletsView.fxml"));
-            MyWalletControl myWalletControl = new MyWalletControl(this);
+            MyWalletControl myWalletControl = new MyWalletControl(this, walletList);
             fxmlLoader.setController(myWalletControl);
             AnchorPane pane = fxmlLoader.load();
             detail_pane.getChildren().clear();
@@ -149,6 +149,8 @@ public class MainFrameControl {
 
     private void serializeTransactions() {
         try {
+            walletList.remove(selectedWallet);
+            walletList.add(0,selectedWallet);
             FileOutputStream file = new FileOutputStream("Transaction Record.ser");
             ObjectOutputStream writer = new ObjectOutputStream(file);
             for (Wallets obj : walletList) {
@@ -176,6 +178,7 @@ public class MainFrameControl {
                     break;
                 }
             }
+            setSelectedWallet(walletList.get(0));
             walletList.forEach(System.out::println);
         } catch (Exception ex) {
             System.err.println("failed to read " + "Transaction Record.ser" + ", "+ ex);
@@ -202,10 +205,14 @@ public class MainFrameControl {
 
     public void setSelectedWallet(Wallets w){
         selectedWallet = w;
+        wallet_icon.setImage(new Image("sample/icons/wallets/" + w.getIcon_name() + ".png"));
     }
 
     public void addNewWallet(Wallets w){
         walletList.add(w);
     }
 
+    public Wallets getSelectedWallet(){
+        return selectedWallet;
+    }
 }
