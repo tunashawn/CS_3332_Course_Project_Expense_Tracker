@@ -204,8 +204,13 @@ public class MainFrameControl {
     }
 
     public void setSelectedWallet(Wallets w){
-        selectedWallet = w;
-        wallet_icon.setImage(new Image("sample/icons/wallets/" + w.getIcon_name() + ".png"));
+        if (w != null) {
+            selectedWallet = w;
+            wallet_icon.setImage(new Image("sample/icons/wallets/" + w.getIcon_name() + ".png"));
+        } else {
+            selectedWallet = null;
+            wallet_icon.setImage(new Image("sample/icons/wallets/wallet.png"));
+        }
     }
 
     public void addNewWallet(Wallets w){
@@ -215,4 +220,6 @@ public class MainFrameControl {
     public Wallets getSelectedWallet(){
         return selectedWallet;
     }
+
+
 }
