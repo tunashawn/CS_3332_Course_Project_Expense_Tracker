@@ -3,6 +3,7 @@ package sample.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,34 +13,37 @@ import sample.models.Wallets;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class AddNewWalletControl {
-    @FXML private ImageView icon;
-    @FXML private JFXComboBox<String> currency_combobox;
+public class WalletsDetailControl {
+    @FXML
+    private ImageView icon;
+    @FXML private Label currency;
     @FXML private TextField balance, name_label;
-    @FXML private JFXButton save_button,
-                            wallet_button,
-                            visa_button,
-                            paypal_button,
-                            mastercard_button,
-                            google_button,
-                            america_button;
-
-    private ArrayList<String> currencyList = new ArrayList<>();
+    @FXML private JFXButton save_button, delete_button,
+            wallet_button,
+            visa_button,
+            paypal_button,
+            mastercard_button,
+            google_button,
+            america_button;
     private String chose_icon = "wallet";
     private MainFrameControl mainFrameControl;
     private MyWalletControl myWalletControl;
+    private Wallets w;
+    private Wallets selected_wallet;
 
-    public AddNewWalletControl(MainFrameControl mainFrameControl, MyWalletControl myWalletControl) {
-        populateCurrencyList();
+    public WalletsDetailControl(MainFrameControl mainFrameControl, MyWalletControl myWalletControl, Wallets w) {
         this.mainFrameControl = mainFrameControl;
         this.myWalletControl = myWalletControl;
+        this.w = w;
     }
 
     @FXML
     private void initialize(){
-        for (String s : currencyList) {
-            currency_combobox.getItems().add(s);
-        }
+        chose_icon =  w.getIcon_name();
+        icon.setImage(new Image("sample/icons/wallets/" + chose_icon + ".png"));
+        name_label.setText(w.getName());
+        currency.setText(w.getCurrency());
+        balance.setText(String.valueOf(w.getBalance()));
 
         wallet_button.setOnAction(event -> {chose_icon = "wallet"; icon.setImage(new Image("sample/icons/wallets/" + chose_icon + ".png"));});
         visa_button.setOnAction(event -> {chose_icon = "visa"; icon.setImage(new Image("sample/icons/wallets/" + chose_icon + ".png"));});
@@ -47,36 +51,36 @@ public class AddNewWalletControl {
         mastercard_button.setOnAction(event -> {chose_icon = "mastercard"; icon.setImage(new Image("sample/icons/wallets/" + chose_icon + ".png"));});
         google_button.setOnAction(event -> {chose_icon = "google_wallet"; icon.setImage(new Image("sample/icons/wallets/" + chose_icon + ".png"));});
         america_button.setOnAction(event -> {chose_icon = "american_express"; icon.setImage(new Image("sample/icons/wallets/" + chose_icon + ".png"));});
+
         save_button.setOnAction(event -> setSave_button());
+        delete_button.setOnAction(event -> {
+            try {
+                setDelete_button();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void setSave_button(){
         try {
             String name = name_label.getText();
-            String currency = currency_combobox.getValue();
             double balance = Double.parseDouble(this.balance.getText());
 
-            Wallets new_wallet = new Wallets(name, chose_icon, currency, balance, balance, 0,new ArrayList<Transactions>());
+            w.setName(name);
+            w.setBalance(balance);
+            w.setIcon_name(chose_icon);
 
-            mainFrameControl.setSelectedWallet(new_wallet);
-            mainFrameControl.wallet_icon.setImage(new Image("sample/icons/wallets/" + chose_icon + ".png"));
-            mainFrameControl.addNewWallet(new_wallet);
-
-            myWalletControl.setSelected_panel(new_wallet);
             myWalletControl.clearDetailPanel();
             myWalletControl.populateWalletList();
+            if (mainFrameControl.getSelectedWallet().equals(w))
+                myWalletControl.setSelected_panel(w);
         } catch (NumberFormatException | IOException ignored){
 
         }
     }
 
-    private void populateCurrencyList(){
-        currencyList.add("Vietnam Dong");
-        currencyList.add("US Dollar");
-        currencyList.add("Pound");
-        currencyList.add("Euro");
-        currencyList.add("Yuan Renminbi");
-        currencyList.add("Yen");
-        currencyList.add("Won");
+    private void setDelete_button() throws IOException {
+        myWalletControl.deleteAWallet(w);
     }
 }
