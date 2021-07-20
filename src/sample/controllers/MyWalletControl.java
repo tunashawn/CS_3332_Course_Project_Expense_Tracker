@@ -115,16 +115,17 @@ public class MyWalletControl {
     }
 
     public void deleteAWallet(Wallets w) throws IOException {
-        walletList.remove(w);
 
-        if (mainFrameControl.getSelectedWallet().equals(w) && walletList.size() > 0) {
+        selected_panel.getChildren().clear();
+
+        if (mainFrameControl.getSelectedWallet().equals(w) && walletList.size() > 1) {
+            walletList.remove(w);
             mainFrameControl.setSelectedWallet(walletList.get(0));
-            setSelected_panel(walletList.get(0));
+            setSelected_panel(mainFrameControl.getSelectedWallet());
         } else{
+            walletList.remove(w);
             setSelected_panel(null);
             mainFrameControl.setSelectedWallet(null);
-            selected_panel.getChildren().clear();
-
         }
         clearDetailPanel();
         populateWalletList();
