@@ -145,8 +145,6 @@ public class MainFrameControl {
     }
 
 
-
-
     private void serializeTransactions() {
         try {
             walletList.remove(selectedWallet);
@@ -184,8 +182,6 @@ public class MainFrameControl {
             System.err.println("failed to read " + "Transaction Record.ser" + ", "+ ex);
         }
     }
-
-
 
     public void createNewTransaction(Transactions t){
         transactionsOfSelectedWallet.add(t);

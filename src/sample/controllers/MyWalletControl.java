@@ -25,16 +25,15 @@ public class MyWalletControl {
 
     public MyWalletControl(MainFrameControl mainFrameControl, ArrayList<Wallets> walletList) {
         this.mainFrameControl = mainFrameControl;
-        if (walletList != null)
-            this.walletList = walletList;
+        this.walletList = walletList;
     }
 
     @FXML
     private void initialize() throws IOException {
-        if (mainFrameControl.getSelectedWallet() != null)
+        if (walletList != null && walletList.size() > 0) {
             setSelected_panel(mainFrameControl.getSelectedWallet());
-        if (walletList != null)
             populateWalletList();
+        }
 
         new_wallet_button.setOnAction(event -> setNew_wallet_button());
     }
@@ -68,6 +67,7 @@ public class MyWalletControl {
     }
 
     public void setSelected_panel(Wallets w) throws IOException {
+        selected_panel.getChildren().clear();
         if (w != null) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/sample/views/WalletCardView.fxml"));
@@ -86,24 +86,26 @@ public class MyWalletControl {
 
     public void populateWalletList() throws IOException {
         grid.getChildren().clear();
-        if (walletList != null && walletList.size() > 0){
+        if (walletList != null){
             int column = 0;
             int row = 1;
             for (Wallets w : walletList) {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/sample/views/WalletCardView.fxml"));
+                if (w != null) {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("/sample/views/WalletCardView.fxml"));
 
-                WalletCardControl walletCardControl = new WalletCardControl(w, this);
-                fxmlLoader.setController(walletCardControl);
-                AnchorPane pane = fxmlLoader.load();
+                    WalletCardControl walletCardControl = new WalletCardControl(w, this);
+                    fxmlLoader.setController(walletCardControl);
+                    AnchorPane pane = fxmlLoader.load();
 
-                if (column == 1) {
-                    column = 0;
-                    ++row;
+                    if (column == 1) {
+                        column = 0;
+                        ++row;
+                    }
+
+                    grid.add(pane, column++, row);
+                    GridPane.setMargin(pane, new Insets(15, 0, 0, 0));
                 }
-
-                grid.add(pane, column++, row);
-                GridPane.setMargin(pane, new Insets(15, 0, 0, 0));
             }
         }
     }

@@ -26,10 +26,12 @@ public class WalletCardControl {
 
     @FXML
     private void initialize(){
-        name_label.setText(wallet.getName());
-        balance_label.setText(Main.formatMoney(wallet.getBalance(),wallet.getCurrency()));
-        icon.setImage(new Image("sample/icons/wallets/" + wallet.getIcon_name() + ".png"));
-        selected_panel.setOnMouseClicked(event -> setSelected_panel());
+        if (wallet != null) {
+            name_label.setText(wallet.getName());
+            balance_label.setText(Main.formatMoney(wallet.getBalance(),wallet.getCurrency()));
+            icon.setImage(new Image("sample/icons/wallets/" + wallet.getIcon_name() + ".png"));
+            selected_panel.setOnMouseClicked(event -> setSelected_panel());
+        }
     }
 
     private void setSelected_panel(){
