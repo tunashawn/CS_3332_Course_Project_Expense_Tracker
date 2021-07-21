@@ -41,7 +41,7 @@ public class MainFrameControl {
     private ArrayList<Transactions> transactionsOfSelectedWallet = new ArrayList<>();
     private ArrayList<Categories> categories = new ArrayList<>();
     private Wallets selectedWallet;
-
+    private String selecting_view = "";
 
     public MainFrameControl() throws IOException {
         thisStage = new Stage();
@@ -89,10 +89,10 @@ public class MainFrameControl {
 
     }
 
-    private void openMyWallets() {
+    public void openMyWallets() {
         try {
             title_label.setText("My Wallets");
-
+            selecting_view = "My Wallets";
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/sample/views/MyWalletsView.fxml"));
             MyWalletControl myWalletControl = new MyWalletControl(this, walletList);
@@ -110,10 +110,10 @@ public class MainFrameControl {
         addTransactionControl.showStage();
     }
 
-    private void openTransactionView() {
+    public void openTransactionView() {
         try {
             title_label.setText("Transactions");
-
+            selecting_view = "Transactions";
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/sample/views/TransactionsView.fxml"));
             TransactionControl transactionControl = new TransactionControl(this);
@@ -126,10 +126,10 @@ public class MainFrameControl {
         }
     }
 
-    private void openReportView() {
+    public void openReportView() {
         try {
             title_label.setText("Reports");
-
+            selecting_view = "Reports";
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/sample/views/ReportView.fxml"));
 
@@ -191,9 +191,6 @@ public class MainFrameControl {
         transactionsOfSelectedWallet.remove(t);
     }
 
-    public ArrayList<Transactions> getTransactionsOfSelectedWallet(){
-        return transactionsOfSelectedWallet;
-    }
 
     public ArrayList<Categories> getCategories(){
         return categories;
@@ -217,5 +214,5 @@ public class MainFrameControl {
         return selectedWallet;
     }
 
-
+    public String getSelecting_view(){return selecting_view;}
 }

@@ -10,7 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import sample.Main;
 import sample.models.Transactions;
+import sample.models.Wallets;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,9 +32,11 @@ public class TransactionControl {
     private MainFrameControl mainFrameControl;
     private ArrayList<Transactions> transactionList;
     private ArrayList<ArrayList<Transactions>> groupItemList = new ArrayList<ArrayList<Transactions>>();
-
+    private Wallets w;
     public TransactionControl(MainFrameControl mainFrameControl) {
         this.mainFrameControl = mainFrameControl;
+        this.w = mainFrameControl.getSelectedWallet();
+        transactionList = w.getTransactionList();
         thisStage = new Stage();
         createGroupItemList();
     }
@@ -43,13 +47,12 @@ public class TransactionControl {
 
     @FXML
     private void initialize() throws IOException {
+        setData();
         populateTransactionHistory();
     }
 
     public void createGroupItemList(){
-        if (mainFrameControl.getTransactionsOfSelectedWallet() != null && mainFrameControl.getTransactionsOfSelectedWallet().size() > 0) {
-            this.transactionList = mainFrameControl.getTransactionsOfSelectedWallet();
-
+        if (transactionList != null && transactionList.size() > 0) {
             transactionList.sort(Collections.reverseOrder());
 
             String date = transactionList.get(0).getDateAsString();
@@ -93,6 +96,14 @@ public class TransactionControl {
                 GridPane.setMargin(pane, new Insets(15, 0, 5, 100));
             }
         }
+    }
+
+    private void setData(){
+        if (w != null) {
+            wallet_name.setText(w.getName());
+            balance_label.setText(Main.formatMoney(w.getBalance(),w.getCurrency()));
+        }
+
     }
 
 }

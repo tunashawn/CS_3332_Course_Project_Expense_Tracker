@@ -93,8 +93,13 @@ public class AddTransactionControl {
             LocalDate date = date_datepicker.getValue();
             Transactions newTransaction = new Transactions(amount, type, category, note, date);
             // Now create new transaction
-            mainFrameControl.createNewTransaction(newTransaction);
+            mainFrameControl.getSelectedWallet().getTransactionList().add(newTransaction);
             System.out.println(newTransaction);
+            switch (mainFrameControl.getSelecting_view()) {
+                case "My Wallets" -> mainFrameControl.openMyWallets();
+                case "Transactions" -> mainFrameControl.openTransactionView();
+                case "Reports" -> mainFrameControl.openReportView();
+            }
             thisStage.close();
         } catch (NumberFormatException ignored) {
             warning.setVisible(true);
