@@ -43,6 +43,7 @@ public class MainFrameControl {
     private Wallets selectedWallet;
     private String selecting_view = "";
 
+    private Transactions previous_transaction;
     public MainFrameControl() throws IOException {
         thisStage = new Stage();
         try {
@@ -57,8 +58,7 @@ public class MainFrameControl {
 
 
 
-        categories.add(new Categories("Food", new Image("sample/icons/tomato_96px.png")));
-        categories.add(new Categories("Chicken", new Image("sample/icons/calendar_icon.png")));
+
     }
 
     public void showStage() {
@@ -152,7 +152,8 @@ public class MainFrameControl {
             FileOutputStream file = new FileOutputStream("Transaction Record.ser");
             ObjectOutputStream writer = new ObjectOutputStream(file);
             for (Wallets obj : walletList) {
-                writer.writeObject(obj);
+                if (obj != null)
+                    writer.writeObject(obj);
             }
             writer.close();
             file.close();
@@ -215,4 +216,19 @@ public class MainFrameControl {
     }
 
     public String getSelecting_view(){return selecting_view;}
+
+    public void setPrevious_transaction(Transactions t){
+        previous_transaction = t;
+    }
+    public Transactions getPrevious_transaction(){
+        return previous_transaction;
+    }
+
+    public void refreshView() {
+        switch (getSelecting_view()) {
+            case "My Wallets" -> openMyWallets();
+            case "Transactions" -> openTransactionView();
+            case "Reports" -> openReportView();
+        }
+    }
 }

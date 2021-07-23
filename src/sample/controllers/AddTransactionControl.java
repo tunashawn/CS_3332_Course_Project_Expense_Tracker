@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import sample.Main;
 import sample.models.Categories;
 import sample.models.Transactions;
 
@@ -63,44 +64,76 @@ public class AddTransactionControl {
         warning.setVisible(false);
         cancel_button.setOnAction(event -> setCancel_button());
         save_button.setOnAction(event -> setSave_button());
-
-        for (Categories i: mainFrameControl.getCategories()){
-            category_combobox.getItems().add(i.getName());
-        }
         expense.setSelected(true);
+        date_datepicker.setValue(LocalDate.now());
+        if (mainFrameControl.getPrevious_transaction() != null){
+            income.setSelected(mainFrameControl.getPrevious_transaction().getAmount() >= 0);
+            expense.setSelected(mainFrameControl.getPrevious_transaction().getAmount() < 0);
+            date_datepicker.setValue(mainFrameControl.getPrevious_transaction().getDate());
+        }
+        if (expense.isSelected()) {
+            for (Categories i: Main.getExpenseCategories()){
+                category_combobox.getItems().add(i.getName());
+            }
+        } else {
+            for (Categories i: Main.getIncomeCategories()){
+                category_combobox.getItems().add(i.getName());
+            }
+        }
 
         income.setOnAction(event -> {
             type = 1;
             expense.setSelected(false);
+            category_combobox.getItems().clear();
+            for (Categories i: Main.getIncomeCategories()){
+                category_combobox.getItems().add(i.getName());
+            }
         });
         expense.setOnAction(event -> {
             type = -1;
             income.setSelected(false);
+            category_combobox.getItems().clear();
+            for (Categories i: Main.getExpenseCategories()){
+                category_combobox.getItems().add(i.getName());
+            }
+        });
+
+        category_combobox.setOnAction(event -> {
+            for (Categories c: Main.getExpenseCategories()){
+                if (c.getName().equals(category_combobox.getValue())) {
+                    category_icon.setImage(c.getIcon());
+                    break;
+                }
+            }
+            for (Categories c: Main.getIncomeCategories()){
+                if (c.getName().equals(category_combobox.getValue())){
+                    category_icon.setImage(c.getIcon());
+                    break;
+                }
+            }
         });
     }
 
     private void setSave_button(){
         try{
-            double amount = Double.parseDouble(amount_textfield.getText());
-            String category = null;
-            for (Categories i: mainFrameControl.getCategories()){
-                if (i.getName().equals(category_combobox.getValue())){
-                    category = i.getName();
-                    break;
-                }
-            }
+            String category = category_combobox.getValue();
             String note = note_textfield.getText();
             LocalDate date = date_datepicker.getValue();
-            Transactions newTransaction = new Transactions(amount, type, category, note, date);
-            // Now create new transaction
-            mainFrameControl.getSelectedWallet().getTransactionList().add(newTransaction);
-            System.out.println(newTransaction);
-            switch (mainFrameControl.getSelecting_view()) {
-                case "My Wallets" -> mainFrameControl.openMyWallets();
-                case "Transactions" -> mainFrameControl.openTransactionView();
-                case "Reports" -> mainFrameControl.openReportView();
+            double amount = Double.parseDouble(amount_textfield.getText());
+            if (type == -1)
+                amount = 0 - amount;
+            if (category != null && date != null) {
+                Transactions newTransaction = new Transactions(amount, mainFrameControl.getSelectedWallet().getCurrency(), category, note, date);
+                // Now create new transaction
+                System.out.println(newTransaction);
+                // Update balance
+                mainFrameControl.getSelectedWallet().addNewTransaction(newTransaction);
+                mainFrameControl.setPrevious_transaction(newTransaction);
+
+                mainFrameControl.refreshView();
+
+                thisStage.close();
             }
-            thisStage.close();
         } catch (NumberFormatException ignored) {
             warning.setVisible(true);
         }

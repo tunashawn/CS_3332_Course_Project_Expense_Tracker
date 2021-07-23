@@ -20,9 +20,11 @@ public class TransactionGroupCardControl {
     @FXML private Label day_of_month, day_of_week, month_year, total;
 
     private ArrayList<Transactions> transactionsInADay;
+    private MainFrameControl mainFrameControl;
 
-    public TransactionGroupCardControl(ArrayList<Transactions> transactionList) {
+    public TransactionGroupCardControl(ArrayList<Transactions> transactionList, MainFrameControl mFC) {
         this.transactionsInADay = transactionList;
+        this.mainFrameControl = mFC;
         thisStage = new Stage();
     }
 
@@ -39,7 +41,7 @@ public class TransactionGroupCardControl {
     public void calculateTotal(){
         double total = 0;
         for (Transactions t : transactionsInADay) {
-            total += t.getAmount() * t.getType();
+            total += t.getAmount();
         }
 
         this.total.setText(String.valueOf(total));
@@ -66,10 +68,9 @@ public class TransactionGroupCardControl {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("/sample/views/TransactionCard.fxml"));
 
-                    TransactionCardControl transactionCardControl = new TransactionCardControl(t);
+                    TransactionCardControl transactionCardControl = new TransactionCardControl(t, mainFrameControl);
                     fxmlLoader.setController(transactionCardControl);
                     AnchorPane pane = fxmlLoader.load();
-                    transactionCardControl.setData();
 
                     if (column == 1) {
                         column = 0;

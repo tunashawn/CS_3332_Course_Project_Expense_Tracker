@@ -4,9 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -22,9 +20,6 @@ public class TransactionControl {
     private final Stage thisStage;
 
 
-    @FXML private Label lblFromController1;
-    @FXML private TextField txtToFirstController;
-    @FXML private Button btnSetLayout1Text;
     @FXML private GridPane grid;
     @FXML private Label wallet_name, balance_label, month_label, income, expense, total_label;
     @FXML private JFXButton previous_month, next_month;
@@ -33,10 +28,13 @@ public class TransactionControl {
     private ArrayList<Transactions> transactionList;
     private ArrayList<ArrayList<Transactions>> groupItemList = new ArrayList<ArrayList<Transactions>>();
     private Wallets w;
+
     public TransactionControl(MainFrameControl mainFrameControl) {
         this.mainFrameControl = mainFrameControl;
         this.w = mainFrameControl.getSelectedWallet();
-        transactionList = w.getTransactionList();
+        if (w != null) {
+            transactionList = w.getTransactionList();
+        }
         thisStage = new Stage();
         createGroupItemList();
     }
@@ -83,7 +81,7 @@ public class TransactionControl {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/sample/views/TransactionGroupCard.fxml"));
 
-                TransactionGroupCardControl transactionGroupCardControl = new TransactionGroupCardControl(g);
+                TransactionGroupCardControl transactionGroupCardControl = new TransactionGroupCardControl(g, mainFrameControl);
                 fxmlLoader.setController(transactionGroupCardControl);
                 AnchorPane pane = fxmlLoader.load();
 
@@ -95,6 +93,19 @@ public class TransactionControl {
                 grid.add(pane, column++, row);
                 GridPane.setMargin(pane, new Insets(15, 0, 5, 100));
             }
+        } else
+            showNothingToDisplay();
+    }
+
+    private void showNothingToDisplay(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/sample/views/NothingToDisplay.fxml"));
+            AnchorPane pane = fxmlLoader.load();
+            grid.getChildren().clear();
+            grid.add(pane,0,0);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

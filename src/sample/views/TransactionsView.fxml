@@ -22,12 +22,12 @@
                <children>
                   <VBox alignment="CENTER" maxHeight="106.0" maxWidth="1100.0" minHeight="65.0" minWidth="400.0" prefHeight="85.0" prefWidth="400.0" style="-fx-background-color: #2ecc71;">
                      <children>
-                        <Label fx:id="wallet_name" style="-fx-text-fill: white;" text="Wallet" textFill="WHITE">
+                        <Label fx:id="wallet_name" style="-fx-text-fill: white;" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="balance_label" style="-fx-text-fill: white;" text="2,421,290 đ" textFill="WHITE">
+                        <Label fx:id="balance_label" style="-fx-text-fill: white;" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>

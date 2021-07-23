@@ -54,7 +54,7 @@
             </VBox>
             <HBox alignment="CENTER" prefWidth="119.0" GridPane.columnIndex="3">
                <children>
-                  <JFXButton alignment="CENTER" contentDisplay="CENTER" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" prefHeight="30.0" prefWidth="29.0">
+                  <JFXButton fx:id="delete_button" alignment="CENTER" contentDisplay="CENTER" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" prefHeight="30.0" prefWidth="29.0">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
