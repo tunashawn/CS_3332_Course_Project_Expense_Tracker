@@ -119,7 +119,7 @@ public class AddTransactionControl {
             String category = category_combobox.getValue();
             String note = note_textfield.getText();
             LocalDate date = date_datepicker.getValue();
-            double amount = Double.parseDouble(amount_textfield.getText());
+            double amount = Math.abs(Double.parseDouble(amount_textfield.getText()));
             if (type == -1)
                 amount = 0 - amount;
             if (category != null && date != null) {
