@@ -75,7 +75,7 @@ public class TransactionControl {
      */
     public void populateTransactionHistory() throws IOException {
         createGroupItemList();
-        grid.getChildren().clear();
+
         if (transactionList != null && transactionList.size() > 0){
             int column = 0;
             int row = 1;
@@ -100,7 +100,7 @@ public class TransactionControl {
                     System.out.println(trans_by_day);
                     updateLeftPanel(month);
 
-
+                    grid.getChildren().clear();
                     for (ArrayList<Transactions> transactions : trans_by_day) {
 
                         FXMLLoader fxmlLoader = new FXMLLoader();
