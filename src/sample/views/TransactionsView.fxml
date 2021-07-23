@@ -48,7 +48,10 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <Label fx:id="month_label" alignment="CENTER" contentDisplay="CENTER" maxWidth="200.0" minWidth="200.0" prefHeight="18.0" prefWidth="200.0" text="THIS MONTH" />
+                        <Label fx:id="month_label" alignment="CENTER" contentDisplay="CENTER" maxWidth="200.0" minWidth="200.0" prefHeight="18.0" prefWidth="200.0">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
                         <JFXButton fx:id="next_month" maxHeight="35.0" maxWidth="35.0" minHeight="35.0" minWidth="35.0" prefHeight="35.0" prefWidth="35.0">
                            <font>
                               <Font name="System Bold" size="16.0" />
@@ -78,7 +81,7 @@
                            <children>
                               <Label text="Inflow">
                                  <padding>
-                                    <Insets left="15.0" />
+                                    <Insets left="30.0" />
                                  </padding>
                                  <font>
                                     <Font size="15.0" />
@@ -86,26 +89,35 @@
                               </Label>
                               <Label text="Outflow" GridPane.rowIndex="1">
                                  <padding>
-                                    <Insets left="15.0" />
+                                    <Insets left="30.0" />
                                  </padding>
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="income" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxWidth="180.0" minHeight="18.0" prefHeight="18.0" prefWidth="180.0" text="0" textAlignment="RIGHT" GridPane.columnIndex="1">
+                              <Label fx:id="income" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxWidth="200.0" minHeight="18.0" prefHeight="18.0" prefWidth="200.0" style="-fx-text-fill: green;" text="0" textAlignment="RIGHT" GridPane.columnIndex="1">
                                  <font>
-                                    <Font size="15.0" />
+                                    <Font name="System Bold" size="15.0" />
                                  </font>
+                                 <padding>
+                                    <Insets right="30.0" />
+                                 </padding>
                               </Label>
-                              <Label fx:id="expense" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxWidth="180.0" minWidth="180.0" text="0" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <Label fx:id="expense" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxWidth="200.0" minWidth="180.0" prefHeight="21.0" prefWidth="200.0" style="-fx-text-fill: red;" text="0" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <font>
-                                    <Font size="15.0" />
+                                    <Font name="System Bold" size="15.0" />
                                  </font>
+                                 <padding>
+                                    <Insets right="30.0" />
+                                 </padding>
                               </Label>
-                              <Label fx:id="total_label" alignment="TOP_RIGHT" contentDisplay="RIGHT" maxWidth="180.0" minWidth="180.0" text="0" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <Label fx:id="total_label" alignment="TOP_RIGHT" contentDisplay="RIGHT" maxWidth="200.0" minWidth="180.0" prefHeight="21.0" prefWidth="200.0" text="0" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <font>
-                                    <Font size="15.0" />
+                                    <Font name="System Bold" size="15.0" />
                                  </font>
+                                 <padding>
+                                    <Insets right="30.0" />
+                                 </padding>
                               </Label>
                            </children>
                         </GridPane>
