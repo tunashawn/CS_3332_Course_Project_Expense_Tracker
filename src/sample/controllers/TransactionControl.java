@@ -94,6 +94,7 @@ public class TransactionControl {
                     }
                     trans_of_month.add(list);
 
+                    updateLeftPanel(g);
 
                     for (ArrayList<Transactions> t : trans_of_month) {
                         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -155,6 +156,21 @@ public class TransactionControl {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void updateLeftPanel(ArrayList<Transactions> list){
+        month_label.setText(current_date.getMonth().toString());
+        double total_income = 0;
+        double total_expense = 0;
+        for (Transactions t : list) {
+            if (t.getAmount() > 0)
+                total_income += t.getAmount();
+            else
+                total_expense += t.getAmount();
+        }
+        income.setText(String.valueOf(total_income));
+        expense.setText(String.valueOf(total_expense));
+        total_label.setText(String.valueOf(total_expense + total_income));
     }
 
 }
