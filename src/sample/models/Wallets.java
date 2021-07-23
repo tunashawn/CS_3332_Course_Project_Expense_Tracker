@@ -23,6 +23,17 @@ public class Wallets implements Serializable {
         this.transactionList = transactionList;
     }
 
+    public void deleteATransaction(Transactions t){
+        balance -= t.getAmount();
+        transactionList.remove(t);
+    }
+
+    public void addNewTransaction(Transactions t){
+        balance += t.getAmount();
+
+        transactionList.add(t);
+    }
+
     public String getName() {
         return name;
     }

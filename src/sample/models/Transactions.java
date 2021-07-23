@@ -6,18 +6,27 @@ import java.time.format.DateTimeFormatter;
 
 public class Transactions implements Comparable<Transactions>, Serializable {
     private double amount;
+    private String currency;
     private String category;
     private String note;
     private String date;
-    private int type;
 
-    public Transactions(double amount, int type, String category, String note, LocalDate date) {
+    public Transactions(double amount, String currency, String category, String note, LocalDate date) {
         this.amount = amount;
-        this.type = type;
+        this.currency = currency;
         this.category = category;
         this.note = note;
-        this.date = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));;
+        this.date = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
 
     public double getAmount() {
         return amount;
@@ -47,20 +56,12 @@ public class Transactions implements Comparable<Transactions>, Serializable {
         return date;
     }
     public LocalDate getDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(this.date, formatter);
     }
 
     public void setDate(LocalDate date) {
-        this.date = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
+        this.date = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     @Override
@@ -75,7 +76,6 @@ public class Transactions implements Comparable<Transactions>, Serializable {
                 ", category='" + category + '\'' +
                 ", note='" + note + '\'' +
                 ", date='" + date + '\'' +
-                ", type=" + type +
                 '}';
     }
 }

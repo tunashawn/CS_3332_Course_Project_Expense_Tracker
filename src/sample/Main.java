@@ -2,10 +2,13 @@ package sample;
 
 import javafx.application.Application;
 
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import sample.controllers.MainFrameControl;
+import sample.models.Categories;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class Main extends Application {
 
@@ -28,6 +31,25 @@ public class Main extends Application {
         }
         DecimalFormat df = new DecimalFormat("#,###.#");
         return CURRENCY + " " + df.format(amount);
+    }
+
+    public static ArrayList<Categories> getExpenseCategories(){
+        ArrayList<Categories> categories = new ArrayList<>();
+        categories.add(new Categories("Food", new Image("sample/categories/food.png")));
+        categories.add(new Categories("Drink", new Image("sample/categories/drink.png")));
+        categories.add(new Categories("Fast food", new Image("sample/categories/fast food.png")));
+        categories.add(new Categories("Snack", new Image("sample/categories/snack.png")));
+        categories.add(new Categories("Medical", new Image("sample/categories/medical.png")));
+        categories.add(new Categories("Cloth", new Image("sample/categories/cloth.png")));
+        categories.add(new Categories("Laundry", new Image("sample/categories/laundry.png")));
+        return categories;
+    }
+    public static ArrayList<Categories> getIncomeCategories(){
+        ArrayList<Categories> categories = new ArrayList<>();
+        categories.add(new Categories("Income", new Image("sample/categories/income.png")));
+        categories.add(new Categories("Gift", new Image("sample/categories/gift.png")));
+
+        return categories;
     }
 
     @Override

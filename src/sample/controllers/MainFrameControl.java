@@ -41,8 +41,9 @@ public class MainFrameControl {
     private ArrayList<Transactions> transactionsOfSelectedWallet = new ArrayList<>();
     private ArrayList<Categories> categories = new ArrayList<>();
     private Wallets selectedWallet;
+    private String selecting_view = "";
 
-
+    private Transactions previous_transaction;
     public MainFrameControl() throws IOException {
         thisStage = new Stage();
         try {
@@ -57,8 +58,7 @@ public class MainFrameControl {
 
 
 
-        categories.add(new Categories("Food", new Image("sample/icons/tomato_96px.png")));
-        categories.add(new Categories("Chicken", new Image("sample/icons/calendar_icon.png")));
+
     }
 
     public void showStage() {
@@ -89,10 +89,10 @@ public class MainFrameControl {
 
     }
 
-    private void openMyWallets() {
+    public void openMyWallets() {
         try {
             title_label.setText("My Wallets");
-
+            selecting_view = "My Wallets";
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/sample/views/MyWalletsView.fxml"));
             MyWalletControl myWalletControl = new MyWalletControl(this, walletList);
@@ -110,10 +110,10 @@ public class MainFrameControl {
         addTransactionControl.showStage();
     }
 
-    private void openTransactionView() {
+    public void openTransactionView() {
         try {
             title_label.setText("Transactions");
-
+            selecting_view = "Transactions";
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/sample/views/TransactionsView.fxml"));
             TransactionControl transactionControl = new TransactionControl(this);
@@ -126,10 +126,10 @@ public class MainFrameControl {
         }
     }
 
-    private void openReportView() {
+    public void openReportView() {
         try {
             title_label.setText("Reports");
-
+            selecting_view = "Reports";
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/sample/views/ReportView.fxml"));
 
@@ -152,7 +152,8 @@ public class MainFrameControl {
             FileOutputStream file = new FileOutputStream("Transaction Record.ser");
             ObjectOutputStream writer = new ObjectOutputStream(file);
             for (Wallets obj : walletList) {
-                writer.writeObject(obj);
+                if (obj != null)
+                    writer.writeObject(obj);
             }
             writer.close();
             file.close();
@@ -191,9 +192,6 @@ public class MainFrameControl {
         transactionsOfSelectedWallet.remove(t);
     }
 
-    public ArrayList<Transactions> getTransactionsOfSelectedWallet(){
-        return transactionsOfSelectedWallet;
-    }
 
     public ArrayList<Categories> getCategories(){
         return categories;
@@ -217,5 +215,20 @@ public class MainFrameControl {
         return selectedWallet;
     }
 
+    public String getSelecting_view(){return selecting_view;}
 
+    public void setPrevious_transaction(Transactions t){
+        previous_transaction = t;
+    }
+    public Transactions getPrevious_transaction(){
+        return previous_transaction;
+    }
+
+    public void refreshView() {
+        switch (getSelecting_view()) {
+            case "My Wallets" -> openMyWallets();
+            case "Transactions" -> openTransactionView();
+            case "Reports" -> openReportView();
+        }
+    }
 }
