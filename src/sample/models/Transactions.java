@@ -16,7 +16,7 @@ public class Transactions implements Comparable<Transactions>, Serializable {
         this.currency = currency;
         this.category = category;
         this.note = note;
-        this.date = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        this.date = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     public String getCurrency() {
@@ -56,12 +56,12 @@ public class Transactions implements Comparable<Transactions>, Serializable {
         return date;
     }
     public LocalDate getDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(this.date, formatter);
     }
 
     public void setDate(LocalDate date) {
-        this.date = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        this.date = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     @Override

@@ -68,6 +68,7 @@ public class MyWalletControl {
 
     public void setSelected_panel(Wallets w) throws IOException {
         selected_panel.getChildren().clear();
+        mainFrameControl.setSelectedWallet(w);
         if (w != null) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/sample/views/WalletCardView.fxml"));
@@ -78,8 +79,6 @@ public class MyWalletControl {
 
             selected_panel.getChildren().clear();
             selected_panel.getChildren().add(pane);
-
-            mainFrameControl.setSelectedWallet(w);
         }
     }
 

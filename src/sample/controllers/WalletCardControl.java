@@ -37,7 +37,7 @@ public class WalletCardControl {
     private void setSelected_panel(){
         myWalletControl.openWalletDetail(wallet);
         try {
-            myWalletControl.setSelected_panel(wallet);
+            myWalletControl.setSelected_panel(this.wallet);
         } catch (IOException e) {
             e.printStackTrace();
         }
