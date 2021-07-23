@@ -7,11 +7,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.WordUtils;
 import sample.models.Transactions;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 
 public class TransactionGroupCardControl {
     private final Stage thisStage;
@@ -55,8 +58,8 @@ public class TransactionGroupCardControl {
     private void populateTransactionGroup() {
         if (transactionsInADay != null && transactionsInADay.size() > 0){
             day_of_month.setText(String.valueOf(transactionsInADay.get(0).getDate().getDayOfMonth()));
-            day_of_week.setText(String.valueOf(transactionsInADay.get(0).getDate().getDayOfWeek()));
-            String monYear = String.valueOf(transactionsInADay.get(0).getDate().getMonth());
+            day_of_week.setText(StringUtils.capitalize(transactionsInADay.get(0).getDate().getDayOfWeek().toString().toLowerCase(Locale.ROOT)));
+            String monYear = StringUtils.capitalize(transactionsInADay.get(0).getDate().getMonth().toString().toLowerCase(Locale.ROOT));
             monYear += " " + String.valueOf(transactionsInADay.get(0).getDate().getYear());
             month_year.setText(monYear);
             int column = 0;
