@@ -1,6 +1,7 @@
 package sample.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -79,6 +80,8 @@ public class MainFrameControl {
         openTransactionView();
 
         thisStage.setOnCloseRequest(event -> serializeTransactions());
+        thisStage.setOnHidden(event -> System.exit(0));
+
 
         wallet_button.setOnAction(event -> openMyWallets());
 
