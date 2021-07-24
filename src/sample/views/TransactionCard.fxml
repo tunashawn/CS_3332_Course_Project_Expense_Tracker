@@ -42,13 +42,16 @@
                         <Insets left="10.0" />
                      </VBox.margin>
                      <font>
-                        <Font name="System Bold" size="13.0" />
+                        <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
                   <Label fx:id="note" maxWidth="200.0" prefHeight="18.0" prefWidth="200.0" text="Tomato">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
                   </Label>
                </children>
             </VBox>

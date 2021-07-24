@@ -35,7 +35,10 @@ public class TransactionControl {
         if (wallet != null) {
             transactionList = wallet.getTransactionList();
         }
-        current_date = LocalDate.now();
+        if (mainFrameControl.getTransactionSelectingDate() == null)
+            current_date = LocalDate.now();
+        else
+            current_date = mainFrameControl.getTransactionSelectingDate();
 
     }
 
@@ -151,6 +154,7 @@ public class TransactionControl {
     private void increaseMonth(){
         try {
             current_date = current_date.plusMonths(1);
+            mainFrameControl.setTransactionSelectingDate(current_date);
             month_label.setText(StringUtils.capitalize(current_date.getMonth().toString().toLowerCase(Locale.ROOT)));
             income.setText("0");
             expense.setText("0");
@@ -164,6 +168,7 @@ public class TransactionControl {
     private void decreaseMonth(){
         try {
             current_date = current_date.minusMonths(1);
+            mainFrameControl.setTransactionSelectingDate(current_date);
             month_label.setText(StringUtils.capitalize(current_date.getMonth().toString().toLowerCase(Locale.ROOT)));
             income.setText("0");
             expense.setText("0");
