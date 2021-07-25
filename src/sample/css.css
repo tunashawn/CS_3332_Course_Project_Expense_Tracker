@@ -1,3 +1,7 @@
 .combo-box-popup .list-view {
     -fx-font-size : 15pt;
 }
+
+
+.default-color0.chart-bar { -fx-bar-fill: #f25a59}
+.default-color1.chart-bar { -fx-bar-fill: #009ae5}

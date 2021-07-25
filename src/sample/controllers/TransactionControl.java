@@ -35,7 +35,10 @@ public class TransactionControl {
         if (wallet != null) {
             transactionList = wallet.getTransactionList();
         }
-        current_date = LocalDate.now();
+        if (mainFrameControl.getTransactionSelectingDate() == null)
+            current_date = LocalDate.now();
+        else
+            current_date = mainFrameControl.getTransactionSelectingDate();
 
     }
 
@@ -75,7 +78,7 @@ public class TransactionControl {
      */
     public void populateTransactionHistory() throws IOException {
         createGroupItemList();
-        grid.getChildren().clear();
+
         if (transactionList != null && transactionList.size() > 0){
             int column = 0;
             int row = 1;
@@ -100,7 +103,7 @@ public class TransactionControl {
                     System.out.println(trans_by_day);
                     updateLeftPanel(month);
 
-
+                    grid.getChildren().clear();
                     for (ArrayList<Transactions> transactions : trans_by_day) {
 
                         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -151,6 +154,7 @@ public class TransactionControl {
     private void increaseMonth(){
         try {
             current_date = current_date.plusMonths(1);
+            mainFrameControl.setTransactionSelectingDate(current_date);
             month_label.setText(StringUtils.capitalize(current_date.getMonth().toString().toLowerCase(Locale.ROOT)));
             income.setText("0");
             expense.setText("0");
@@ -164,6 +168,7 @@ public class TransactionControl {
     private void decreaseMonth(){
         try {
             current_date = current_date.minusMonths(1);
+            mainFrameControl.setTransactionSelectingDate(current_date);
             month_label.setText(StringUtils.capitalize(current_date.getMonth().toString().toLowerCase(Locale.ROOT)));
             income.setText("0");
             expense.setText("0");

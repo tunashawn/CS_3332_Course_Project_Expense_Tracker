@@ -30,6 +30,7 @@ public class AddTransactionControl {
     @FXML private AnchorPane root;
     @FXML private RadioButton income, expense;
     @FXML private Label warning;
+    @FXML private Label currency_label;
     @FXML private ImageView category_icon;
 
     private int type = -1;
@@ -61,6 +62,17 @@ public class AddTransactionControl {
      */
     @FXML
     private void initialize() throws IOException {
+        String CURRENCY = "";
+        switch (mainFrameControl.getSelectedWallet().getCurrency()){
+            case "Vietnam Dong": CURRENCY = "₫"; break;
+            case "US Dollar": CURRENCY = "$"; break;
+            case "Pound": CURRENCY = "£"; break;
+            case "Euro": CURRENCY = "€"; break;
+            case "Yuan Renminbi": CURRENCY = "¥"; break;
+            case "Yen": CURRENCY = "JP¥"; break;
+            case "Won": CURRENCY = "₩"; break;
+        }
+        currency_label.setText(CURRENCY);
         warning.setVisible(false);
         cancel_button.setOnAction(event -> setCancel_button());
         save_button.setOnAction(event -> setSave_button());
@@ -119,7 +131,7 @@ public class AddTransactionControl {
             String category = category_combobox.getValue();
             String note = note_textfield.getText();
             LocalDate date = date_datepicker.getValue();
-            double amount = Double.parseDouble(amount_textfield.getText());
+            double amount = Math.abs(Double.parseDouble(amount_textfield.getText()));
             if (type == -1)
                 amount = 0 - amount;
             if (category != null && date != null) {

@@ -113,9 +113,9 @@
                   </VBox>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label text="VND">
+                        <Label fx:id="currency_label" text="VND">
                            <font>
-                              <Font name="System Bold" size="20.0" />
+                              <Font name="System Bold" size="25.0" />
                            </font>
                         </Label>
                      </children>

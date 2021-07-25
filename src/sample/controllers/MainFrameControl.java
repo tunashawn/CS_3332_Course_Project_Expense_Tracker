@@ -1,6 +1,7 @@
 package sample.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,6 +17,7 @@ import sample.models.Transactions;
 import sample.models.Wallets;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class MainFrameControl {
@@ -42,6 +44,7 @@ public class MainFrameControl {
     private ArrayList<Categories> categories = new ArrayList<>();
     private Wallets selectedWallet;
     private String selecting_view = "";
+    private LocalDate trans_selecting_date;
 
     private Transactions previous_transaction;
     public MainFrameControl() throws IOException {
@@ -77,6 +80,8 @@ public class MainFrameControl {
         openTransactionView();
 
         thisStage.setOnCloseRequest(event -> serializeTransactions());
+        thisStage.setOnHidden(event -> System.exit(0));
+
 
         wallet_button.setOnAction(event -> openMyWallets());
 
@@ -136,7 +141,6 @@ public class MainFrameControl {
             ReportFrameControl reportFrameControl = new ReportFrameControl(this);
             fxmlLoader.setController(reportFrameControl);
             AnchorPane pane = fxmlLoader.load();
-            reportFrameControl.setData();
             detail_pane.getChildren().clear();
             detail_pane.getChildren().add(pane);
         } catch (IOException e) {
@@ -230,5 +234,12 @@ public class MainFrameControl {
             case "Transactions" -> openTransactionView();
             case "Reports" -> openReportView();
         }
+    }
+
+    public LocalDate getTransactionSelectingDate(){
+        return trans_selecting_date;
+    }
+    public void setTransactionSelectingDate(LocalDate date){
+        trans_selecting_date = date;
     }
 }
