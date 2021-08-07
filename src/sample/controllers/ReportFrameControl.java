@@ -6,17 +6,23 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.*;
 import javafx.scene.control.ComboBox;
+import sample.models.Wallets;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class ReportFrameControl {
 
     @FXML private BarChart<String, Number> bar_chart;
     @FXML private PieChart left_pie, right_pie;
-    @FXML private ComboBox<String> time_range_combobox;
-    private final MainFrameControl mainFrameControl;
+    @FXML private ComboBox<String> time_range_combobox, wallet_combobox;
 
+    private ArrayList<Wallets> walletList;
+    private Wallets selectedWallet;
 
-    public ReportFrameControl(MainFrameControl controller) {
-        this.mainFrameControl = controller;
+    public ReportFrameControl(Wallets selectedWallet, ArrayList<Wallets> walletList) {
+        this.walletList = walletList;
+        this.selectedWallet = selectedWallet;
     }
 
 
@@ -52,6 +58,15 @@ public class ReportFrameControl {
                 new PieChart.Data("Medical", 27)
         );
         left_pie.setData(data_left_pie);
+    }
+
+
+    private void populateWalletComboBox(){
+        ArrayList<String> wallet_names = new ArrayList<>();
+        for (Wallets wallets : walletList) {
+            wallet_names.add(wallets.getName());
+        }
+        Collections.sort(wallet_names);
     }
 }
 
