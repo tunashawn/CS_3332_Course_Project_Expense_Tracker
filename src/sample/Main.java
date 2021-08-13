@@ -40,15 +40,18 @@ public class Main extends Application {
         categories.add(new Categories("Fast food", new Image("sample/categories/fast food.png")));
         categories.add(new Categories("Snack", new Image("sample/categories/snack.png")));
         categories.add(new Categories("Medical", new Image("sample/categories/medical.png")));
-        categories.add(new Categories("Cloth", new Image("sample/categories/cloth.png")));
+        categories.add(new Categories("Clothes", new Image("sample/categories/clothes.png")));
         categories.add(new Categories("Laundry", new Image("sample/categories/laundry.png")));
+        categories.add(new Categories("Rental", new Image("sample/categories/rental.png")));
+        categories.add(new Categories("Parking", new Image("sample/categories/parking.png")));
+        categories.add(new Categories("Taxi", new Image("sample/categories/taxi.png")));
         return categories;
     }
     public static ArrayList<Categories> getIncomeCategories(){
         ArrayList<Categories> categories = new ArrayList<>();
-        categories.add(new Categories("Income", new Image("sample/categories/income.png")));
+        categories.add(new Categories("Income", new Image("sample/categories/salary.png")));
         categories.add(new Categories("Gift", new Image("sample/categories/gift.png")));
-
+        categories.add(new Categories("Lottery", new Image("sample/categories/lottery.png")));
         return categories;
     }
 

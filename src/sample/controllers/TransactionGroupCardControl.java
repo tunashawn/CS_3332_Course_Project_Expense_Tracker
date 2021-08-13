@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
+import sample.Main;
 import sample.models.Transactions;
 
 import java.io.IOException;
@@ -47,7 +48,7 @@ public class TransactionGroupCardControl {
             total += t.getAmount();
         }
 
-        this.total.setText(String.valueOf(total));
+        this.total.setText(Main.formatMoney(total, mainFrameControl.getSelectedWallet().getCurrency()));
 
     }
 

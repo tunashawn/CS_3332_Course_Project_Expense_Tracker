@@ -60,9 +60,10 @@ public class TransactionControl {
      * Populate My Order pane
      */
     public void populateTransactionHistory() throws IOException {
-        trans_by_month = Utils.groupTransactionsByMonth(transactionList);
+
 
         if (transactionList != null && transactionList.size() > 0) {
+            trans_by_month = Utils.groupTransactionsByMonth(transactionList);
             int column = 0;
             int row = 1;
             grid.getChildren().clear();
@@ -170,9 +171,9 @@ public class TransactionControl {
             else
                 total_expense += t.getAmount();
         }
-        income.setText(String.valueOf(total_income));
-        expense.setText(String.valueOf(total_expense));
-        total_label.setText(String.valueOf(total_expense + total_income));
+        income.setText(Main.formatMoney(total_income, wallet.getCurrency()));
+        expense.setText(Main.formatMoney(total_expense, wallet.getCurrency()));
+        total_label.setText(Main.formatMoney(total_expense + total_income, wallet.getCurrency()));
     }
 
 }
