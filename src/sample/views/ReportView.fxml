@@ -5,8 +5,11 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -15,49 +18,69 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" maxHeight="700.0" maxWidth="1100.0" minHeight="700.0" minWidth="1100.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="pane" maxHeight="700.0" maxWidth="1100.0" minHeight="700.0" minWidth="1100.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane layoutX="8.0" prefHeight="700.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="400.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <VBox maxHeight="700.0" maxWidth="650.0" minHeight="700.0" minWidth="650.0" prefHeight="700.0" prefWidth="650.0" GridPane.columnIndex="1">
-               <children>
-                  <HBox maxHeight="400.0" maxWidth="650.0" minHeight="400.0" minWidth="650.0" prefHeight="400.0" prefWidth="650.0">
-                     <children>
-                        <PieChart fx:id="left_pie" title="Income" />
-                        <PieChart fx:id="right_pie" title="Expense" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER">
+            <VBox alignment="CENTER" maxWidth="400.0" minWidth="400.0" prefHeight="700.0" prefWidth="400.0">
                <children>
                   <Label prefHeight="18.0" prefWidth="250.0" text="Select Wallet">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="wallet_combobox" prefHeight="26.0" prefWidth="250.0">
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
                      <VBox.margin>
                         <Insets bottom="30.0" />
                      </VBox.margin>
-                  </ComboBox>
+                     <children>
+                        <ComboBox fx:id="wallet_combobox" prefHeight="26.0" prefWidth="250.0" />
+                     </children>
+                  </HBox>
                   <Label prefHeight="18.0" prefWidth="250.0" text="Select Time Range">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="time_range_combobox" prefHeight="26.0" prefWidth="250.0">
-                     <VBox.margin>
-                        <Insets bottom="30.0" />
-                     </VBox.margin>
-                  </ComboBox>
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
+                     <children>
+                        <ComboBox fx:id="time_range_combobox" prefHeight="25.0" prefWidth="250.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="450.0">
+                     <children>
+                        <Button fx:id="back_button" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/back.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label fx:id="time_label" alignment="CENTER" prefHeight="17.0" prefWidth="159.0" text="This Month">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="forward_button" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/forward.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
                   <BarChart fx:id="bar_chart" maxHeight="300.0" maxWidth="400.0" minHeight="300.0" minWidth="400.0" prefHeight="300.0" prefWidth="400.0" stylesheets="@../css.css">
                     <xAxis>
                       <CategoryAxis label="Time" side="BOTTOM" />
@@ -66,6 +89,16 @@
                       <NumberAxis label="Amount" side="LEFT" />
                     </yAxis>
                   </BarChart>
+               </children>
+            </VBox>
+            <VBox maxHeight="700.0" maxWidth="700.0" minHeight="700.0" minWidth="700.0" prefHeight="700.0" prefWidth="700.0" GridPane.columnIndex="1">
+               <children>
+                  <HBox maxHeight="400.0" maxWidth="650.0" minHeight="400.0" minWidth="650.0" prefHeight="400.0" prefWidth="650.0">
+                     <children>
+                        <PieChart fx:id="left_pie" title="Income" />
+                        <PieChart fx:id="right_pie" title="Expense" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>
