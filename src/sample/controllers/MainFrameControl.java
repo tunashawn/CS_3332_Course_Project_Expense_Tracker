@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 import sample.models.Categories;
 import sample.models.Transactions;
 import sample.models.Wallets;
+import sample.utils.Utils;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -23,21 +25,29 @@ import java.util.ArrayList;
 public class MainFrameControl {
     private final Stage thisStage;
 
-    @FXML Button wallet_button;
-    @FXML JFXButton new_transaction_button;
-    @FXML JFXButton transaction_button;
-    @FXML JFXButton report_button;
-    @FXML JFXButton planning_button;
-    @FXML JFXButton more_button;
+    @FXML
+    Button wallet_button;
+    @FXML
+    Button new_transaction_button;
+    @FXML
+    Button transaction_button;
+    @FXML
+    Button report_button;
+    @FXML
+    Button planning_button;
+    @FXML
+    Button more_button;
     @FXML
     ImageView wallet_icon;
     @FXML
     Label title_label;
-    @FXML AnchorPane content_panel;
+    @FXML
+    AnchorPane content_panel;
     @FXML
     Pane detail_pane;
 
-    @FXML AnchorPane root;
+    @FXML
+    AnchorPane root;
 
     private ArrayList<Wallets> walletList = new ArrayList<>();
     private ArrayList<Transactions> transactionsOfSelectedWallet = new ArrayList<>();
@@ -47,6 +57,7 @@ public class MainFrameControl {
     private LocalDate trans_selecting_date;
 
     private Transactions previous_transaction;
+
     public MainFrameControl() throws IOException {
         thisStage = new Stage();
         try {
@@ -58,8 +69,6 @@ public class MainFrameControl {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
 
 
     }
@@ -84,13 +93,20 @@ public class MainFrameControl {
 
 
         wallet_button.setOnAction(event -> openMyWallets());
+        wallet_button.setTooltip(Utils.getToolTip("Wallets"));
 
         new_transaction_button.setOnAction(event -> openCreateNewTransaction());
+        new_transaction_button.setTooltip(Utils.getToolTip("Transactions"));
 
         transaction_button.setOnAction(event -> openTransactionView());
+        transaction_button.setTooltip(Utils.getToolTip("Transactions"));
 
         report_button.setOnAction(event -> openReportView());
+        report_button.setTooltip(Utils.getToolTip("Reports"));
 
+        planning_button.setTooltip(Utils.getToolTip("Planning"));
+
+        more_button.setTooltip(Utils.getToolTip("More"));
 
     }
 
@@ -109,6 +125,7 @@ public class MainFrameControl {
             e.printStackTrace();
         }
     }
+
     // CREATE NEW TRANSACTION FRAME
     private void openCreateNewTransaction() {
         AddTransactionControl addTransactionControl = new AddTransactionControl(this);
@@ -138,7 +155,7 @@ public class MainFrameControl {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/sample/views/ReportView.fxml"));
 
-            ReportFrameControl reportFrameControl = new ReportFrameControl(this);
+            ReportFrameControl reportFrameControl = new ReportFrameControl(selectedWallet, walletList);
             fxmlLoader.setController(reportFrameControl);
             AnchorPane pane = fxmlLoader.load();
             detail_pane.getChildren().clear();
@@ -152,7 +169,7 @@ public class MainFrameControl {
     private void serializeTransactions() {
         try {
             walletList.remove(selectedWallet);
-            walletList.add(0,selectedWallet);
+            walletList.add(0, selectedWallet);
             FileOutputStream file = new FileOutputStream("Transaction Record.ser");
             ObjectOutputStream writer = new ObjectOutputStream(file);
             for (Wallets obj : walletList) {
@@ -163,7 +180,7 @@ public class MainFrameControl {
             file.close();
             System.out.println("Serializing completed");
         } catch (Exception ex) {
-            System.err.println("failed to write " + "Transaction Record.ser" + ", "+ ex);
+            System.err.println("failed to write " + "Transaction Record.ser" + ", " + ex);
         }
     }
 
@@ -184,24 +201,17 @@ public class MainFrameControl {
             setSelectedWallet(walletList.get(0));
             walletList.forEach(System.out::println);
         } catch (Exception ex) {
-            System.err.println("failed to read " + "Transaction Record.ser" + ", "+ ex);
+            System.err.println("failed to read " + "Transaction Record.ser" + ", " + ex);
         }
     }
 
-    public void createNewTransaction(Transactions t){
-        transactionsOfSelectedWallet.add(t);
-    }
-
-    public void deleteTransaction(Transactions t){
-        transactionsOfSelectedWallet.remove(t);
-    }
 
 
-    public ArrayList<Categories> getCategories(){
+    public ArrayList<Categories> getCategories() {
         return categories;
     }
 
-    public void setSelectedWallet(Wallets w){
+    public void setSelectedWallet(Wallets w) {
         if (w != null) {
             selectedWallet = w;
             wallet_icon.setImage(new Image("sample/icons/wallets/" + w.getIcon_name() + ".png"));
@@ -211,20 +221,23 @@ public class MainFrameControl {
         }
     }
 
-    public void addNewWallet(Wallets w){
+    public void addNewWallet(Wallets w) {
         walletList.add(w);
     }
 
-    public Wallets getSelectedWallet(){
+    public Wallets getSelectedWallet() {
         return selectedWallet;
     }
 
-    public String getSelecting_view(){return selecting_view;}
+    public String getSelecting_view() {
+        return selecting_view;
+    }
 
-    public void setPrevious_transaction(Transactions t){
+    public void setPrevious_transaction(Transactions t) {
         previous_transaction = t;
     }
-    public Transactions getPrevious_transaction(){
+
+    public Transactions getPrevious_transaction() {
         return previous_transaction;
     }
 
@@ -236,10 +249,11 @@ public class MainFrameControl {
         }
     }
 
-    public LocalDate getTransactionSelectingDate(){
+    public LocalDate getTransactionSelectingDate() {
         return trans_selecting_date;
     }
-    public void setTransactionSelectingDate(LocalDate date){
+
+    public void setTransactionSelectingDate(LocalDate date) {
         trans_selecting_date = date;
     }
 }

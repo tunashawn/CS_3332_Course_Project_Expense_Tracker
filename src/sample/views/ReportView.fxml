@@ -6,12 +6,14 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="pane" maxHeight="700.0" maxWidth="1100.0" minHeight="700.0" minWidth="1100.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -36,7 +38,22 @@
             </VBox>
             <VBox alignment="CENTER">
                <children>
-                  <ComboBox fx:id="time_range_combobox" prefHeight="26.0" prefWidth="253.0">
+                  <Label prefHeight="18.0" prefWidth="250.0" text="Select Wallet">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="wallet_combobox" prefHeight="26.0" prefWidth="250.0">
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <Label prefHeight="18.0" prefWidth="250.0" text="Select Time Range">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="time_range_combobox" prefHeight="26.0" prefWidth="250.0">
                      <VBox.margin>
                         <Insets bottom="30.0" />
                      </VBox.margin>
