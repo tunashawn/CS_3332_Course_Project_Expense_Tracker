@@ -67,6 +67,38 @@ public class Utils {
         return  trans_by_month;
     }
 
+
+    /**
+     * Input raw transaction list, return list of list of transaction
+     * Each sub list stands for transaction in a specific month
+     * @param transactionList
+     * @return
+     */
+    public static ArrayList<ArrayList<Transactions>> groupTransactionsByWeek(ArrayList<Transactions> transactionList) {
+        ArrayList<ArrayList<Transactions>> trans_by_week = new ArrayList<ArrayList<Transactions>>();
+        if (transactionList != null) {
+            transactionList.sort(Collections.reverseOrder());
+
+            LocalDate date = transactionList.get(0).getDate();
+            ArrayList<Transactions> list = new ArrayList<>();
+
+            for (Transactions t : transactionList) {
+                if (t.getDate().getMonth() != date.getMonth()) {
+                    trans_by_week.add(list);
+                    list = new ArrayList<>();
+                    date = t.getDate();
+                }
+                list.add(t);
+            }
+            trans_by_week.add(list);
+            System.out.println("list:");
+            System.out.println(list);
+        }
+        return  trans_by_week;
+    }
+
+
+
     public static ArrayList<ArrayList<Transactions>> groupTransactionsByDay(ArrayList<Transactions> transactionsInMonth, LocalDate date){
         ArrayList<ArrayList<Transactions>> trans_by_day = new ArrayList<ArrayList<Transactions>>();
         ArrayList<Transactions> list = new ArrayList<>();

@@ -64,7 +64,7 @@ public class Main extends Application {
 
     public static ArrayList<Categories> getIncomeCategories() {
         ArrayList<Categories> categories = new ArrayList<>();
-        categories.add(new Categories("Income", new Image("sample/categories/salary.png")));
+        categories.add(new Categories("Salary", new Image("sample/categories/salary.png")));
         categories.add(new Categories("Gift", new Image("sample/categories/gift.png")));
         categories.add(new Categories("Lottery", new Image("sample/categories/lottery.png")));
         return categories;
