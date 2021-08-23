@@ -13,99 +13,99 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" maxHeight="730.0" maxWidth="1180.0" minHeight="730.0" minWidth="1180.0" prefHeight="730.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox layoutY="-1.0" prefHeight="730.0" prefWidth="1180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox prefHeight="730.0" prefWidth="1180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox>
+            <GridPane maxHeight="1.7976931348623157E308" maxWidth="80.0" minHeight="730.0" minWidth="80.0" prefWidth="80.0" style="-fx-background-color: #3f3f3f;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="545.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="55.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <GridPane maxHeight="730.0" maxWidth="80.0" minHeight="730.0" minWidth="80.0" prefWidth="80.0" style="-fx-background-color: #3f3f3f;">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="545.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="55.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <Button fx:id="wallet_button" mnemonicParsing="false" prefHeight="75.0" prefWidth="87.0" style="-fx-background-color: transparent;">
-                                 <graphic>
-                                    <ImageView fx:id="wallet_icon" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../icons/wallets/wallet.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                              <Button fx:id="new_transaction_button" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: transparent;">
-                                 <graphic>
-                                    <ImageView fitHeight="45.0" fitWidth="45.0">
-                                       <image>
-                                          <Image url="@../icons/add_new_icon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                              <Button fx:id="transaction_button" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: transparent;">
-                                 <graphic>
-                                    <ImageView fitHeight="40.0" fitWidth="40.0">
-                                       <image>
-                                          <Image url="@../icons/transactions_icon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                              <Button fx:id="report_button" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: transparent;">
-                                 <graphic>
-                                    <ImageView fitHeight="40.0" fitWidth="40.0">
-                                       <image>
-                                          <Image url="@../icons/report_icon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                              <Button fx:id="planning_button" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: transparent;">
-                                 <graphic>
-                                    <ImageView fitHeight="40.0" fitWidth="40.0">
-                                       <image>
-                                          <Image url="@../icons/planning_icon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                              <Button fx:id="more_button" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: transparent;">
-                                 <graphic>
-                                    <ImageView fitHeight="40.0" fitWidth="40.0">
-                                       <image>
-                                          <Image url="@../icons/tools_icon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                           </children>
-                        </VBox>
-                        <HBox alignment="CENTER" GridPane.rowIndex="1" />
+                        <Button fx:id="wallet_button" mnemonicParsing="false" prefHeight="75.0" prefWidth="87.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fx:id="wallet_icon" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/wallets/wallet.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="new_transaction_button" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="45.0">
+                                 <image>
+                                    <Image url="@../icons/add_new_icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="transaction_button" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0">
+                                 <image>
+                                    <Image url="@../icons/transactions_icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="report_button" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0">
+                                 <image>
+                                    <Image url="@../icons/report_icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="planning_button" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0">
+                                 <image>
+                                    <Image url="@../icons/planning_icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="more_button" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0">
+                                 <image>
+                                    <Image url="@../icons/tools_icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                      </children>
-                  </GridPane>
-                  <VBox maxWidth="1100.0" minWidth="1100.0">
+                  </VBox>
+                  <HBox alignment="CENTER" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+            <VBox maxWidth="1.7976931348623157E308">
+               <children>
+                  <Pane maxWidth="1.7976931348623157E308" style="-fx-background-color: #1FAA59;">
                      <children>
-                        <Pane maxHeight="30.0" maxWidth="1100.0" minHeight="30.0" minWidth="1100.0" prefHeight="30.0" prefWidth="1100.0" style="-fx-background-color: #1FAA59;">
+                        <HBox layoutX="380.0" layoutY="-1.0">
                            <children>
-                              <Label fx:id="title_label" alignment="CENTER" contentDisplay="CENTER" layoutX="380.0" layoutY="-1.0" prefHeight="17.0" prefWidth="340.0" text="Transactions" textFill="WHITE">
+                              <Label fx:id="title_label" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="340.0" text="Transactions" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
                               </Label>
                            </children>
-                        </Pane>
-                        <Pane fx:id="detail_pane" maxHeight="700.0" maxWidth="1100.0" minHeight="700.0" minWidth="1100.0" prefHeight="700.0" prefWidth="1100.0" />
+                        </HBox>
                      </children>
-                  </VBox>
+                  </Pane>
+                  <Pane fx:id="detail_pane" minHeight="700.0" minWidth="1100.0" prefHeight="700.0" prefWidth="1100.0" />
                </children>
-            </HBox>
+            </VBox>
          </children>
-      </VBox>
+      </HBox>
    </children>
 </AnchorPane>

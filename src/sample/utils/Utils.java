@@ -1,6 +1,7 @@
 package sample.utils;
 
 import javafx.scene.control.Tooltip;
+import org.apache.commons.lang3.StringUtils;
 import sample.models.Transactions;
 
 import java.text.DecimalFormat;
@@ -8,6 +9,7 @@ import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 
 public class Utils {
 
@@ -67,6 +69,38 @@ public class Utils {
         return  trans_by_month;
     }
 
+
+    /**
+     * Input raw transaction list, return list of list of transaction
+     * Each sub list stands for transaction in a specific month
+     * @param transactionList
+     * @return
+     */
+    public static ArrayList<ArrayList<Transactions>> groupTransactionsByWeek(ArrayList<Transactions> transactionList) {
+        ArrayList<ArrayList<Transactions>> trans_by_week = new ArrayList<ArrayList<Transactions>>();
+        if (transactionList != null) {
+            transactionList.sort(Collections.reverseOrder());
+
+            LocalDate date = transactionList.get(0).getDate();
+            ArrayList<Transactions> list = new ArrayList<>();
+
+            for (Transactions t : transactionList) {
+                if (t.getDate().getMonth() != date.getMonth()) {
+                    trans_by_week.add(list);
+                    list = new ArrayList<>();
+                    date = t.getDate();
+                }
+                list.add(t);
+            }
+            trans_by_week.add(list);
+            System.out.println("list:");
+            System.out.println(list);
+        }
+        return  trans_by_week;
+    }
+
+
+
     public static ArrayList<ArrayList<Transactions>> groupTransactionsByDay(ArrayList<Transactions> transactionsInMonth, LocalDate date){
         ArrayList<ArrayList<Transactions>> trans_by_day = new ArrayList<ArrayList<Transactions>>();
         ArrayList<Transactions> list = new ArrayList<>();
@@ -89,5 +123,14 @@ public class Utils {
                 + "-fx-base: #AE3522; "
                 + "-fx-text-fill: orange;");
         return tt;
+    }
+
+    public static String getMonthLabelValue(LocalDate current_date){
+        String mon_year = "";
+        if (current_date.getYear() == LocalDate.now().getYear() && current_date.getMonthValue() == LocalDate.now().getMonthValue())
+            mon_year = "This Month";
+        else
+            mon_year = StringUtils.capitalize(current_date.getMonth().toString().toLowerCase(Locale.ROOT)) + " " + current_date.getYear();
+        return mon_year;
     }
 }

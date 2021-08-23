@@ -124,20 +124,13 @@ public class TransactionControl {
         }
 
     }
-    private String getMonthLabelValue(){
-        String mon_year = "";
-        if (current_date.getYear() == LocalDate.now().getYear() && current_date.getMonthValue() == LocalDate.now().getMonthValue())
-            mon_year = "This Month";
-        else
-            mon_year = StringUtils.capitalize(current_date.getMonth().toString().toLowerCase(Locale.ROOT)) + " " + current_date.getYear();
-        return mon_year;
-    }
+
 
     private void increaseMonth() {
         try {
             current_date = current_date.plusMonths(1);
             mainFrameControl.setTransactionSelectingDate(current_date);
-            month_label.setText(getMonthLabelValue());
+            month_label.setText(Utils.getMonthLabelValue(current_date));
             income.setText("0");
             expense.setText("0");
             total_label.setText("0");
@@ -151,7 +144,7 @@ public class TransactionControl {
         try {
             current_date = current_date.minusMonths(1);
             mainFrameControl.setTransactionSelectingDate(current_date);
-            month_label.setText(getMonthLabelValue());
+            month_label.setText(Utils.getMonthLabelValue(current_date));
             income.setText("0");
             expense.setText("0");
             total_label.setText("0");
@@ -162,7 +155,7 @@ public class TransactionControl {
     }
 
     public void updateLeftPanel(ArrayList<Transactions> list) {
-        month_label.setText(getMonthLabelValue());
+        month_label.setText(Utils.getMonthLabelValue(current_date));
         double total_income = 0;
         double total_expense = 0;
         for (Transactions t : list) {
@@ -175,5 +168,7 @@ public class TransactionControl {
         expense.setText(Main.formatMoney(total_expense, wallet.getCurrency()));
         total_label.setText(Main.formatMoney(total_expense + total_income, wallet.getCurrency()));
     }
+
+
 
 }

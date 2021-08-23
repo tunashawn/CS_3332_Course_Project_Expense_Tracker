@@ -8,22 +8,36 @@ import sample.controllers.MainFrameControl;
 import sample.models.Categories;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Main extends Application {
 
 
-
     public static String formatMoney(double amount, String currency) {
         String CURRENCY = "";
-        switch (currency){
-            case "Vietnam Dong": CURRENCY = "₫"; break;
-            case "US Dollar": CURRENCY = "$"; break;
-            case "Pound": CURRENCY = "£"; break;
-            case "Euro": CURRENCY = "€"; break;
-            case "Yuan Renminbi": CURRENCY = "¥"; break;
-            case "Yen": CURRENCY = "JP¥"; break;
-            case "Won": CURRENCY = "₩"; break;
+        switch (currency) {
+            case "Vietnam Dong":
+                CURRENCY = "₫";
+                break;
+            case "US Dollar":
+                CURRENCY = "$";
+                break;
+            case "Pound":
+                CURRENCY = "£";
+                break;
+            case "Euro":
+                CURRENCY = "€";
+                break;
+            case "Yuan Renminbi":
+                CURRENCY = "¥";
+                break;
+            case "Yen":
+                CURRENCY = "JP¥";
+                break;
+            case "Won":
+                CURRENCY = "₩";
+                break;
         }
         if (CURRENCY.equals("₫")) {
             DecimalFormat df = new DecimalFormat("#,###");
@@ -33,7 +47,7 @@ public class Main extends Application {
         return CURRENCY + " " + df.format(amount);
     }
 
-    public static ArrayList<Categories> getExpenseCategories(){
+    public static ArrayList<Categories> getExpenseCategories() {
         ArrayList<Categories> categories = new ArrayList<>();
         categories.add(new Categories("Food", new Image("sample/categories/food.png")));
         categories.add(new Categories("Drink", new Image("sample/categories/drink.png")));
@@ -47,12 +61,19 @@ public class Main extends Application {
         categories.add(new Categories("Taxi", new Image("sample/categories/taxi.png")));
         return categories;
     }
-    public static ArrayList<Categories> getIncomeCategories(){
+
+    public static ArrayList<Categories> getIncomeCategories() {
         ArrayList<Categories> categories = new ArrayList<>();
-        categories.add(new Categories("Income", new Image("sample/categories/salary.png")));
+        categories.add(new Categories("Salary", new Image("sample/categories/salary.png")));
         categories.add(new Categories("Gift", new Image("sample/categories/gift.png")));
         categories.add(new Categories("Lottery", new Image("sample/categories/lottery.png")));
         return categories;
+    }
+
+
+
+    public static void main(String[] args) {
+        launch(args);
     }
 
     @Override
@@ -61,9 +82,5 @@ public class Main extends Application {
         MainFrameControl mainFrameControl = new MainFrameControl();
         mainFrameControl.showStage();
 
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

@@ -141,7 +141,7 @@ public class AddTransactionControl {
                 // Update balance
                 mainFrameControl.getSelectedWallet().addNewTransaction(newTransaction);
                 mainFrameControl.setPrevious_transaction(newTransaction);
-
+                mainFrameControl.setTransactionSelectingDate(date);
                 mainFrameControl.refreshView();
 
                 thisStage.close();
