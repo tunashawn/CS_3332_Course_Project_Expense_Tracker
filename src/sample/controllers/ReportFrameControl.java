@@ -176,7 +176,7 @@ public class ReportFrameControl {
             ObservableList<PieChart.Data> dataExpensePie = FXCollections.observableArrayList();
             dataExpensePie.addAll(expensePie);
             right_pie.setData(dataExpensePie);
-            right_pie.setTitle("Expenses");
+
 
         }
 
@@ -184,7 +184,7 @@ public class ReportFrameControl {
             ObservableList<PieChart.Data> dataIncomePie = FXCollections.observableArrayList();
             dataIncomePie.addAll(incomePie);
             left_pie.setData(dataIncomePie);
-            left_pie.setTitle("Incomes");
+
         }
     }
 
