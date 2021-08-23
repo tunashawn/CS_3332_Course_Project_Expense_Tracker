@@ -1,13 +1,9 @@
 package sample.controllers;
 
-import com.jfoenix.controls.JFXButton;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -96,7 +92,7 @@ public class MainFrameControl {
         wallet_button.setTooltip(Utils.getToolTip("Wallets"));
 
         new_transaction_button.setOnAction(event -> openCreateNewTransaction());
-        new_transaction_button.setTooltip(Utils.getToolTip("Transactions"));
+        new_transaction_button.setTooltip(Utils.getToolTip("Add New Transactions"));
 
         transaction_button.setOnAction(event -> openTransactionView());
         transaction_button.setTooltip(Utils.getToolTip("Transactions"));
@@ -128,8 +124,17 @@ public class MainFrameControl {
 
     // CREATE NEW TRANSACTION FRAME
     private void openCreateNewTransaction() {
-        AddTransactionControl addTransactionControl = new AddTransactionControl(this);
-        addTransactionControl.showStage();
+        if (selectedWallet != null) {
+            AddTransactionControl addTransactionControl = new AddTransactionControl(this);
+            addTransactionControl.showStage();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.NONE, "PLEASE CREATE A WALLET BEFORE USING THIS FUNCTION!", ButtonType.OK);
+            alert.setTitle("ERROR!");
+
+            alert.getDialogPane().setStyle("-fx-font-size: 15; -fx-font-weight: bold");
+            alert.show();
+        }
     }
 
     public void openTransactionView() {

@@ -1,17 +1,14 @@
 package sample.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import sample.models.Transactions;
 import sample.models.Wallets;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Optional;
 
 public class WalletsDetailControl {
     @FXML
@@ -71,16 +68,24 @@ public class WalletsDetailControl {
             w.setBalance(balance);
             w.setIcon_name(chose_icon);
 
-            myWalletControl.clearDetailPanel();
             myWalletControl.populateWalletList();
             if (mainFrameControl.getSelectedWallet().equals(w))
                 myWalletControl.setSelected_panel(w);
+
+            myWalletControl.showNothingToDisplay();
         } catch (NumberFormatException | IOException ignored){
 
         }
     }
 
     private void setDelete_button() throws IOException {
-        myWalletControl.deleteAWallet(w);
+        Alert alert = new Alert(Alert.AlertType.WARNING, "CONFIRM DELETE THIS WALLET?", ButtonType.YES, ButtonType.CANCEL);
+        Optional<ButtonType> pressed = alert.showAndWait();
+        ButtonType button = pressed.orElse(ButtonType.CANCEL);
+        if (button == ButtonType.YES){
+            myWalletControl.deleteAWallet(w);
+            myWalletControl.showNothingToDisplay();
+        }
+
     }
 }

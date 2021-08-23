@@ -169,22 +169,27 @@ public class ReportFrameControl {
     }
 
     private void populatePieChart() {
+        left_pie.getData().clear();
+
+        right_pie.getData().clear();
+
+        right_pie.setStartAngle(90.0);
+        left_pie.setStartAngle(90.0);
+
         right_pie.setLegendVisible(false);
         left_pie.setLegendVisible(false);
 
         if (expensePie != null) {
             ObservableList<PieChart.Data> dataExpensePie = FXCollections.observableArrayList();
             dataExpensePie.addAll(expensePie);
+
             right_pie.setData(dataExpensePie);
-
-
         }
 
         if (incomePie != null) {
             ObservableList<PieChart.Data> dataIncomePie = FXCollections.observableArrayList();
             dataIncomePie.addAll(incomePie);
             left_pie.setData(dataIncomePie);
-
         }
     }
 
@@ -194,12 +199,6 @@ public class ReportFrameControl {
         expenseList = new ArrayList<>();
         incomePie = new ArrayList<>();
         expensePie = new ArrayList<>();
-//        if (incomePie != null)
-//            incomePie.clear();
-//
-//        if (expensePie != null)
-//            expensePie.clear();
-
 
         for (Categories e : Main.getExpenseCategories()) {
             expensePie.add(new PieChart.Data(e.getName(), 0));
@@ -258,16 +257,16 @@ public class ReportFrameControl {
         try {
             int column = 0;
             int row = 1;
-            incomeList.sort(new Comparator<Transactions>() {
-                @Override
-                public int compare(Transactions t1, Transactions t2) {
-                    if (t1.getAmount() < t2.getAmount())
-                        return -1;
-                    else if (t1.getAmount() > t2.getAmount())
-                        return 1;
-                    return 0;
-                }
-            });
+//            incomeList.sort(new Comparator<Transactions>() {
+//                @Override
+//                public int compare(Transactions t1, Transactions t2) {
+//                    if (t1.getAmount() < t2.getAmount())
+//                        return -1;
+//                    else if (t1.getAmount() > t2.getAmount())
+//                        return 1;
+//                    return 0;
+//                }
+//            });
             for (Transactions data : incomeList) {
                 if (data.getAmount() > 0) {
                     FXMLLoader fxmlLoader = new FXMLLoader();

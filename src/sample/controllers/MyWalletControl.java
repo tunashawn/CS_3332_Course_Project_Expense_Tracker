@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import sample.models.Wallets;
+import sample.utils.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class MyWalletControl {
             setSelected_panel(mainFrameControl.getSelectedWallet());
             populateWalletList();
         }
-
+        Utils.showNothingToDisplay(detail_panel);
         new_wallet_button.setOnAction(event -> setNew_wallet_button());
     }
 
@@ -128,5 +129,10 @@ public class MyWalletControl {
         }
         clearDetailPanel();
         populateWalletList();
+    }
+
+    public void showNothingToDisplay(){
+        detail_panel.getChildren().clear();
+        Utils.showNothingToDisplay(detail_panel);
     }
 }

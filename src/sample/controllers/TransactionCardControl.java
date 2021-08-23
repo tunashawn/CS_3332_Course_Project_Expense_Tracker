@@ -2,6 +2,8 @@ package sample.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,6 +12,8 @@ import javafx.stage.Stage;
 import sample.Main;
 import sample.models.Categories;
 import sample.models.Transactions;
+
+import java.util.Optional;
 
 
 public class TransactionCardControl {
@@ -50,8 +54,14 @@ public class TransactionCardControl {
 
 
     public void setDelete_button(){
-        mainFrameControl.getSelectedWallet().deleteATransaction(transaction);
-        mainFrameControl.refreshView();
+        Alert alert = new Alert(Alert.AlertType.WARNING, "DELETE THIS TRANSACTION?", ButtonType.YES, ButtonType.CANCEL);
+        Optional<ButtonType> pressed = alert.showAndWait();
+        ButtonType button = pressed.orElse(ButtonType.CANCEL);
+        if (button == ButtonType.YES){
+            mainFrameControl.getSelectedWallet().deleteATransaction(transaction);
+            mainFrameControl.refreshView();
+        }
+
     }
 
 

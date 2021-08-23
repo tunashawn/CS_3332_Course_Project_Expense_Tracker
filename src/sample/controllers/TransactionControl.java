@@ -99,23 +99,13 @@ public class TransactionControl {
                     }
                     break;
                 } else
-                    showNothingToDisplay();
+                    Utils.showNothingToDisplay(grid);
             }
         } else
-            showNothingToDisplay();
+            Utils.showNothingToDisplay(grid);
     }
 
-    private void showNothingToDisplay() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/sample/views/NothingToDisplay.fxml"));
-            AnchorPane pane = fxmlLoader.load();
-            grid.getChildren().clear();
-            grid.add(pane, 0, 0);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     private void setData() {
         if (wallet != null) {

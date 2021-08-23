@@ -63,8 +63,10 @@ public class AddNewWalletControl {
             mainFrameControl.addNewWallet(new_wallet);
 
             myWalletControl.setSelected_panel(new_wallet);
-            myWalletControl.clearDetailPanel();
+
             myWalletControl.populateWalletList();
+
+            myWalletControl.showNothingToDisplay();
         } catch (NumberFormatException | IOException ignored){
 
         }
