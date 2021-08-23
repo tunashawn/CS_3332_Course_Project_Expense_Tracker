@@ -1,6 +1,7 @@
 package sample.utils;
 
 import javafx.scene.control.Tooltip;
+import org.apache.commons.lang3.StringUtils;
 import sample.models.Transactions;
 
 import java.text.DecimalFormat;
@@ -8,6 +9,7 @@ import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 
 public class Utils {
 
@@ -121,5 +123,14 @@ public class Utils {
                 + "-fx-base: #AE3522; "
                 + "-fx-text-fill: orange;");
         return tt;
+    }
+
+    public static String getMonthLabelValue(LocalDate current_date){
+        String mon_year = "";
+        if (current_date.getYear() == LocalDate.now().getYear() && current_date.getMonthValue() == LocalDate.now().getMonthValue())
+            mon_year = "This Month";
+        else
+            mon_year = StringUtils.capitalize(current_date.getMonth().toString().toLowerCase(Locale.ROOT)) + " " + current_date.getYear();
+        return mon_year;
     }
 }

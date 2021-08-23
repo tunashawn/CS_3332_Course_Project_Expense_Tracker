@@ -101,7 +101,7 @@ public class MainFrameControl {
         transaction_button.setOnAction(event -> openTransactionView());
         transaction_button.setTooltip(Utils.getToolTip("Transactions"));
 
-        report_button.setOnAction(event -> openReportView());
+        report_button.setOnAction(event -> openReportView(selectedWallet));
         report_button.setTooltip(Utils.getToolTip("Reports"));
 
         planning_button.setTooltip(Utils.getToolTip("Planning"));
@@ -148,14 +148,14 @@ public class MainFrameControl {
         }
     }
 
-    public void openReportView() {
+    public void openReportView(Wallets selectedWallet) {
         try {
             title_label.setText("Reports");
             selecting_view = "Reports";
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/sample/views/ReportView.fxml"));
 
-            ReportFrameControl reportFrameControl = new ReportFrameControl(selectedWallet, walletList);
+            ReportFrameControl reportFrameControl = new ReportFrameControl(this, selectedWallet, walletList);
             fxmlLoader.setController(reportFrameControl);
             AnchorPane pane = fxmlLoader.load();
             detail_pane.getChildren().clear();
@@ -245,7 +245,7 @@ public class MainFrameControl {
         switch (getSelecting_view()) {
             case "My Wallets" -> openMyWallets();
             case "Transactions" -> openTransactionView();
-            case "Reports" -> openReportView();
+            case "Reports" -> openReportView(selectedWallet);
         }
     }
 
