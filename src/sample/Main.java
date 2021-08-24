@@ -67,6 +67,9 @@ public class Main extends Application {
         categories.add(new Categories("Salary", new Image("sample/categories/salary.png")));
         categories.add(new Categories("Gift", new Image("sample/categories/gift.png")));
         categories.add(new Categories("Lottery", new Image("sample/categories/lottery.png")));
+        categories.add(new Categories("Interest", new Image("sample/categories/interest.png")));
+        categories.add(new Categories("Award", new Image("sample/categories/award.png")));
+        categories.add(new Categories("Selling", new Image("sample/categories/selling.png")));
         return categories;
     }
 

@@ -17,15 +17,14 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Locale;
 
 public class TransactionControl {
     @FXML
-    private GridPane grid;
+    GridPane grid;
     @FXML
-    private Label wallet_name, balance_label, month_label, income, expense, total_label;
+    Label wallet_name, balance_label, month_label, income, expense, total_label;
     @FXML
-    private JFXButton previous_month, next_month;
+    JFXButton previous_month, next_month;
 
     private MainFrameControl mainFrameControl;
     private ArrayList<Transactions> transactionList;
@@ -99,23 +98,13 @@ public class TransactionControl {
                     }
                     break;
                 } else
-                    showNothingToDisplay();
+                    Utils.showNothingToDisplay(grid);
             }
         } else
-            showNothingToDisplay();
+            Utils.showNothingToDisplay(grid);
     }
 
-    private void showNothingToDisplay() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/sample/views/NothingToDisplay.fxml"));
-            AnchorPane pane = fxmlLoader.load();
-            grid.getChildren().clear();
-            grid.add(pane, 0, 0);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     private void setData() {
         if (wallet != null) {

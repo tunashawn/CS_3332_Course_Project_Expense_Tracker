@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane layoutX="337.0" layoutY="253.0" prefHeight="700.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="900.0" minWidth="900.0" prefWidth="900.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <VBox>
+               <children>
+                  <JFXButton fx:id="exchanger_jbtn" alignment="BASELINE_LEFT" graphicTextGap="10.0" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: white;" text="Exnchanger">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/exchange_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </JFXButton>
+                  <JFXButton fx:id="interest_rate_jbtn" alignment="BASELINE_LEFT" graphicTextGap="10.0" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: white;" text="Interest Rate">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/interest_rate_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </JFXButton>
+                  <JFXButton fx:id="debt_jbtn" alignment="BASELINE_LEFT" graphicTextGap="10.0" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: white;" text="Debt">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/debt_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="35.0" />
+                     </padding>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <AnchorPane style="-fx-background-color: white;" GridPane.columnIndex="1">
+               <children>
+                  <ImageView fx:id="image" fitHeight="312.0" fitWidth="200.0" layoutX="350.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/empty.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="362.0" layoutY="435.0" prefWidth="177.0" text="Nothing to display...">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane fx:id="detail_panel" layoutX="1.0" layoutY="2.0" prefHeight="702.0" prefWidth="901.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

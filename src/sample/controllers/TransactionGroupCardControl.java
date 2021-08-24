@@ -8,7 +8,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.text.WordUtils;
 import sample.Main;
 import sample.models.Transactions;
 
@@ -20,8 +19,8 @@ import java.util.Locale;
 public class TransactionGroupCardControl {
     private final Stage thisStage;
 
-    @FXML private GridPane grid;
-    @FXML private Label day_of_month, day_of_week, month_year, total;
+    @FXML GridPane grid;
+    @FXML Label day_of_month, day_of_week, month_year, total;
 
     private ArrayList<Transactions> transactionsInADay;
     private MainFrameControl mainFrameControl;
@@ -80,7 +79,6 @@ public class TransactionGroupCardControl {
                         column = 0;
                         ++row;
                     }
-
                     grid.add(pane, column++, row);
                     GridPane.setMargin(pane, new Insets(0));
                 }
@@ -89,9 +87,6 @@ public class TransactionGroupCardControl {
                 e.printStackTrace();
             }
         }
-
-
-
     }
 
 

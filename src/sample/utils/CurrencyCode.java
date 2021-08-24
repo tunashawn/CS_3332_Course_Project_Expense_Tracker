@@ -21,12 +21,9 @@ public enum CurrencyCode {
 
   private double rate;
 
-  private String symbol;
-
   CurrencyCode(String currencyCode, double rate, String symbol) {
     this.currencyCode = currencyCode;
     this.rate = rate;
-    this.symbol = symbol;
   }
 
   public String getCurrencyCode() {
@@ -35,9 +32,5 @@ public enum CurrencyCode {
 
   public double getRate() {
     return rate;
-  }
-
-  public String getSymbol() {
-    return symbol;
   }
 }

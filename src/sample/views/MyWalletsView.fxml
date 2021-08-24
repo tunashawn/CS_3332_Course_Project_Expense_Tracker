@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="700.0" maxWidth="1100.0" minHeight="700.0" minWidth="1100.0" prefHeight="680.0" prefWidth="869.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
@@ -72,7 +73,10 @@
                   </HBox>
                </children>
             </VBox>
-            <AnchorPane fx:id="detail_panel" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f1f1f1;" GridPane.columnIndex="1" />
+            <AnchorPane fx:id="detail_panel" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f1f1f1;" GridPane.columnIndex="1">
+               <children>
+                  <Line endX="100.0" endY="450.0" layoutX="-100.0" layoutY="249.0" startX="100.0" startY="-250.0" stroke="#7d7d7d" />
+               </children></AnchorPane>
          </children>
       </GridPane>
    </children>

@@ -1,9 +1,14 @@
 package sample.utils;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tooltip;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import org.apache.commons.lang3.StringUtils;
+import sample.controllers.TransactionControl;
 import sample.models.Transactions;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.LocalDate;
@@ -14,7 +19,7 @@ import java.util.Locale;
 public class Utils {
 
 
-    public static NumberFormat formatter = new DecimalFormat("#,##0.000");
+    public static NumberFormat formatter = new DecimalFormat("#,##0.00");
 
 
     public static String convertCurrency(String inputCurrencyName, Double inputAmount,
@@ -133,4 +138,28 @@ public class Utils {
             mon_year = StringUtils.capitalize(current_date.getMonth().toString().toLowerCase(Locale.ROOT)) + " " + current_date.getYear();
         return mon_year;
     }
+
+    public static void showNothingToDisplay(AnchorPane grid) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(TransactionControl.class.getResource("/sample/views/NothingToDisplay.fxml"));
+            AnchorPane pane = fxmlLoader.load();
+            grid.getChildren().clear();
+            grid.getChildren().add(pane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void showNothingToDisplay(GridPane grid) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(TransactionControl.class.getResource("/sample/views/NothingToDisplay.fxml"));
+            AnchorPane pane = fxmlLoader.load();
+            grid.getChildren().clear();
+            grid.getChildren().add(pane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

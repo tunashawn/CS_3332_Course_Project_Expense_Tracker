@@ -13,10 +13,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class AddNewWalletControl {
-    @FXML private ImageView icon;
-    @FXML private JFXComboBox<String> currency_combobox;
-    @FXML private TextField balance, name_label;
-    @FXML private JFXButton save_button,
+    @FXML ImageView icon;
+    @FXML JFXComboBox<String> currency_combobox;
+    @FXML TextField balance, name_label;
+    @FXML JFXButton save_button,
                             wallet_button,
                             visa_button,
                             paypal_button,
@@ -63,8 +63,10 @@ public class AddNewWalletControl {
             mainFrameControl.addNewWallet(new_wallet);
 
             myWalletControl.setSelected_panel(new_wallet);
-            myWalletControl.clearDetailPanel();
+
             myWalletControl.populateWalletList();
+
+            myWalletControl.showNothingToDisplay();
         } catch (NumberFormatException | IOException ignored){
 
         }

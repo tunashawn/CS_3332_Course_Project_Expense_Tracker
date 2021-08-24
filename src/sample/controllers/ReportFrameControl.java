@@ -28,19 +28,17 @@ public class ReportFrameControl {
     private NumberAxis yAxis = new NumberAxis();
     private CategoryAxis xAxis = new CategoryAxis();
     @FXML
-    private BarChart<String, Number> bar_chart = new BarChart<String, Number>(xAxis, yAxis);
+    BarChart<String, Number> bar_chart = new BarChart<String, Number>(xAxis, yAxis);
     @FXML
-    private PieChart left_pie, right_pie;
+    PieChart left_pie, right_pie;
     @FXML
-    private ComboBox<String> wallet_combobox, time_range_combobox;
+    ComboBox<String> wallet_combobox;
     @FXML
-    private AnchorPane pane;
+    Button back_button, forward_button;
     @FXML
-    private Button back_button, forward_button;
+    GridPane income_grid, expense_grid;
     @FXML
-    private GridPane income_grid, expense_grid;
-    @FXML
-    private Label time_label;
+    Label time_label;
 
     private ArrayList<Wallets> walletList;
     private Wallets selectedWallet;
@@ -169,22 +167,27 @@ public class ReportFrameControl {
     }
 
     private void populatePieChart() {
+        left_pie.getData().clear();
+
+        right_pie.getData().clear();
+
+        right_pie.setStartAngle(90.0);
+        left_pie.setStartAngle(90.0);
+
         right_pie.setLegendVisible(false);
         left_pie.setLegendVisible(false);
 
         if (expensePie != null) {
             ObservableList<PieChart.Data> dataExpensePie = FXCollections.observableArrayList();
             dataExpensePie.addAll(expensePie);
-            right_pie.setData(dataExpensePie);
-            right_pie.setTitle("Expenses");
 
+            right_pie.setData(dataExpensePie);
         }
 
         if (incomePie != null) {
             ObservableList<PieChart.Data> dataIncomePie = FXCollections.observableArrayList();
             dataIncomePie.addAll(incomePie);
             left_pie.setData(dataIncomePie);
-            left_pie.setTitle("Incomes");
         }
     }
 
@@ -194,12 +197,6 @@ public class ReportFrameControl {
         expenseList = new ArrayList<>();
         incomePie = new ArrayList<>();
         expensePie = new ArrayList<>();
-//        if (incomePie != null)
-//            incomePie.clear();
-//
-//        if (expensePie != null)
-//            expensePie.clear();
-
 
         for (Categories e : Main.getExpenseCategories()) {
             expensePie.add(new PieChart.Data(e.getName(), 0));
@@ -258,16 +255,16 @@ public class ReportFrameControl {
         try {
             int column = 0;
             int row = 1;
-            incomeList.sort(new Comparator<Transactions>() {
-                @Override
-                public int compare(Transactions t1, Transactions t2) {
-                    if (t1.getAmount() < t2.getAmount())
-                        return -1;
-                    else if (t1.getAmount() > t2.getAmount())
-                        return 1;
-                    return 0;
-                }
-            });
+//            incomeList.sort(new Comparator<Transactions>() {
+//                @Override
+//                public int compare(Transactions t1, Transactions t2) {
+//                    if (t1.getAmount() < t2.getAmount())
+//                        return -1;
+//                    else if (t1.getAmount() > t2.getAmount())
+//                        return 1;
+//                    return 0;
+//                }
+//            });
             for (Transactions data : incomeList) {
                 if (data.getAmount() > 0) {
                     FXMLLoader fxmlLoader = new FXMLLoader();
