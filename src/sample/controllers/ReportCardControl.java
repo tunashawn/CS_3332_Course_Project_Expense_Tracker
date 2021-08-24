@@ -13,8 +13,8 @@ public class ReportCardControl {
     private double amount;
     private String currency;
 
-    @FXML private ImageView icon;
-    @FXML private Label name, cost;
+    @FXML ImageView icon;
+    @FXML Label name, cost;
 
     public ReportCardControl(String category, double amount, String currency){
         this.category = category;

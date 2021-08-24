@@ -9,8 +9,8 @@ import java.io.IOException;
 
 public class ToolsViewControl {
 
-    @FXML private JFXButton exchanger_jbtn, interest_rate_jbtn, debt_jbtn;
-    @FXML private AnchorPane detail_panel;
+    @FXML JFXButton exchanger_jbtn, interest_rate_jbtn;
+    @FXML AnchorPane detail_panel;
 
     public ToolsViewControl() {
     }

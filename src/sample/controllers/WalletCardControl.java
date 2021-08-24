@@ -12,9 +12,9 @@ import java.io.IOException;
 
 public class WalletCardControl {
 
-    @FXML private Label name_label, balance_label;
-    @FXML private ImageView icon;
-    @FXML private AnchorPane selected_panel;
+    @FXML Label name_label, balance_label;
+    @FXML ImageView icon;
+    @FXML AnchorPane selected_panel;
 
     private Wallets wallet;
     private  MyWalletControl myWalletControl;

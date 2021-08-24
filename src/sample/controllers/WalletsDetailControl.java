@@ -12,10 +12,10 @@ import java.util.Optional;
 
 public class WalletsDetailControl {
     @FXML
-    private ImageView icon;
-    @FXML private Label currency;
-    @FXML private TextField balance, name_label;
-    @FXML private JFXButton save_button, delete_button,
+    ImageView icon;
+    @FXML Label currency;
+    @FXML TextField balance, name_label;
+    @FXML JFXButton save_button, delete_button,
             wallet_button,
             visa_button,
             paypal_button,
@@ -26,7 +26,6 @@ public class WalletsDetailControl {
     private MainFrameControl mainFrameControl;
     private MyWalletControl myWalletControl;
     private Wallets w;
-    private Wallets selected_wallet;
 
     public WalletsDetailControl(MainFrameControl mainFrameControl, MyWalletControl myWalletControl, Wallets w) {
         this.mainFrameControl = mainFrameControl;

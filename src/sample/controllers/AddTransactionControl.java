@@ -21,19 +21,19 @@ import java.util.Optional;
 public class AddTransactionControl {
     private final Stage thisStage;
 
-    @FXML  Button cancel_button;
-    @FXML  Button save_button;
-    @FXML  Button delete_btn;
+    @FXML Button cancel_button;
+    @FXML Button save_button;
+    @FXML Button delete_btn;
 
-    @FXML  TextField amount_textfield;
-    @FXML  ComboBox<String> category_combobox;
-    @FXML  TextField note_textfield;
-    @FXML  DatePicker date_datepicker;
-    @FXML  RadioButton income, expense;
-    @FXML  Label warning;
-    @FXML  Label currency_label;
-    @FXML  ImageView category_icon;
-    @FXML  Label title;
+    @FXML TextField amount_textfield;
+    @FXML ComboBox<String> category_combobox;
+    @FXML TextField note_textfield;
+    @FXML DatePicker date_datepicker;
+    @FXML RadioButton income, expense;
+    @FXML Label warning;
+    @FXML Label currency_label;
+    @FXML ImageView category_icon;
+    @FXML Label title;
     private int type = -1;
 
     private boolean edit_mode = false;
@@ -93,10 +93,14 @@ public class AddTransactionControl {
             date_datepicker.setValue(mainFrameControl.getPrevious_transaction().getDate());
         }
         if (expense.isSelected()) {
+            type = -1;
+            category_combobox.setPromptText("Select category");
             for (Categories i: Main.getExpenseCategories()){
                 category_combobox.getItems().add(i.getName());
             }
         } else {
+            type = 1;
+            category_combobox.setPromptText("Select category");
             for (Categories i: Main.getIncomeCategories()){
                 category_combobox.getItems().add(i.getName());
             }
@@ -236,7 +240,7 @@ public class AddTransactionControl {
         Optional<ButtonType> pressed = alert.showAndWait();
         ButtonType button = pressed.orElse(ButtonType.CANCEL);
         if (button == ButtonType.YES){
-            mainFrameControl.getSelectedWallet().getTransactionList().remove(editingTransaction);
+            mainFrameControl.getSelectedWallet().deleteATransaction(editingTransaction);
             mainFrameControl.refreshView();
             thisStage.close();
         }

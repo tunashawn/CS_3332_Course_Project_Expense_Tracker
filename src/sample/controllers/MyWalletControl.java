@@ -14,10 +14,10 @@ import java.util.ArrayList;
 
 public class MyWalletControl {
 
-    @FXML private AnchorPane selected_panel;
-    @FXML private GridPane grid;
-    @FXML private Button new_wallet_button;
-    @FXML private AnchorPane detail_panel;
+    @FXML AnchorPane selected_panel;
+    @FXML GridPane grid;
+    @FXML Button new_wallet_button;
+    @FXML AnchorPane detail_panel;
 
 
     private ArrayList<Wallets> walletList;

@@ -9,10 +9,10 @@ import javafx.scene.control.TextField;
 import java.util.ArrayList;
 
 public class InterestRateViewControl {
-    @FXML private TextField amount_tf, rate_tf, result_tf;
-    @FXML private DatePicker startdate_dp, enddate_dp;
-    @FXML private ComboBox<String> type_cbb, timemode_cbb;
-    @FXML private Button calculate_btn;
+    @FXML TextField amount_tf, rate_tf, result_tf;
+    @FXML DatePicker startdate_dp, enddate_dp;
+    @FXML ComboBox<String> type_cbb, timemode_cbb;
+    @FXML Button calculate_btn;
 
     public InterestRateViewControl(){
 

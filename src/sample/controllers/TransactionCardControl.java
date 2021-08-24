@@ -1,11 +1,7 @@
 package sample.controllers;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,10 +10,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import sample.Main;
 import sample.models.Transactions;
-
-import java.io.IOException;
-import java.util.Optional;
-
 
 public class TransactionCardControl {
     private final Stage thisStage;
