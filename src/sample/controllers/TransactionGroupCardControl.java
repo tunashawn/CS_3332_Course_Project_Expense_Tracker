@@ -80,7 +80,6 @@ public class TransactionGroupCardControl {
                         column = 0;
                         ++row;
                     }
-
                     grid.add(pane, column++, row);
                     GridPane.setMargin(pane, new Insets(0));
                 }
@@ -89,9 +88,6 @@ public class TransactionGroupCardControl {
                 e.printStackTrace();
             }
         }
-
-
-
     }
 
 

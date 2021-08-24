@@ -1,7 +1,6 @@
 package sample.controllers;
 
 
-import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,26 +15,29 @@ import sample.models.Transactions;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Optional;
 
 
 public class AddTransactionControl {
     private final Stage thisStage;
 
-    @FXML private JFXButton cancel_button;
-    @FXML private JFXButton save_button;
-    @FXML private TextField amount_textfield;
-    @FXML private ComboBox<String> category_combobox;
-    @FXML private TextField note_textfield;
-    @FXML private DatePicker date_datepicker;
-    @FXML private AnchorPane root;
-    @FXML private RadioButton income, expense;
-    @FXML private Label warning;
-    @FXML private Label currency_label;
-    @FXML private ImageView category_icon;
+    @FXML  Button cancel_button;
+    @FXML  Button save_button;
+    @FXML  Button delete_btn;
 
+    @FXML  TextField amount_textfield;
+    @FXML  ComboBox<String> category_combobox;
+    @FXML  TextField note_textfield;
+    @FXML  DatePicker date_datepicker;
+    @FXML  RadioButton income, expense;
+    @FXML  Label warning;
+    @FXML  Label currency_label;
+    @FXML  ImageView category_icon;
+    @FXML  Label title;
     private int type = -1;
 
-
+    private boolean edit_mode = false;
+    Transactions editingTransaction;
     private MainFrameControl mainFrameControl;
 
     public AddTransactionControl(MainFrameControl mainFrameControl) {
@@ -52,6 +54,22 @@ public class AddTransactionControl {
         }
     }
 
+    public AddTransactionControl(MainFrameControl mainFrameControl, Transactions transaction) {
+        this.mainFrameControl = mainFrameControl;
+        edit_mode = true;
+        editingTransaction = transaction;
+        thisStage = new Stage();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/views/AddTransactionFrame.fxml"));
+            loader.setController(this);
+            thisStage.setScene(new Scene(loader.load()));
+            thisStage.setTitle("Editing Transaction");
+            thisStage.getIcons().add(new Image("/sample/icons/app_logo.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void showStage() {
         thisStage.showAndWait();
     }
@@ -62,16 +80,7 @@ public class AddTransactionControl {
      */
     @FXML
     private void initialize() throws IOException {
-        String CURRENCY = "";
-        switch (mainFrameControl.getSelectedWallet().getCurrency()){
-            case "Vietnam Dong": CURRENCY = "₫"; break;
-            case "US Dollar": CURRENCY = "$"; break;
-            case "Pound": CURRENCY = "£"; break;
-            case "Euro": CURRENCY = "€"; break;
-            case "Yuan Renminbi": CURRENCY = "¥"; break;
-            case "Yen": CURRENCY = "JP¥"; break;
-            case "Won": CURRENCY = "₩"; break;
-        }
+        String CURRENCY = getCurrencyLetter();
         currency_label.setText(CURRENCY);
         warning.setVisible(false);
         cancel_button.setOnAction(event -> setCancel_button());
@@ -93,22 +102,11 @@ public class AddTransactionControl {
             }
         }
 
-        income.setOnAction(event -> {
-            type = 1;
-            expense.setSelected(false);
-            category_combobox.getItems().clear();
-            for (Categories i: Main.getIncomeCategories()){
-                category_combobox.getItems().add(i.getName());
-            }
-        });
-        expense.setOnAction(event -> {
-            type = -1;
-            income.setSelected(false);
-            category_combobox.getItems().clear();
-            for (Categories i: Main.getExpenseCategories()){
-                category_combobox.getItems().add(i.getName());
-            }
-        });
+        income.setOnAction(event -> setIncomeAction());
+        expense.setOnAction(event -> setExpenseAction());
+
+        delete_btn.setVisible(false);
+        delete_btn.setOnAction(event -> setDelete_btn());
 
         category_combobox.setOnAction(event -> {
             for (Categories c: Main.getExpenseCategories()){
@@ -124,6 +122,39 @@ public class AddTransactionControl {
                 }
             }
         });
+        if (edit_mode)
+            setData(editingTransaction);
+    }
+
+    private void setIncomeAction(){
+        type = 1;
+        expense.setSelected(false);
+        category_combobox.getItems().clear();
+        for (Categories i: Main.getIncomeCategories()){
+            category_combobox.getItems().add(i.getName());
+        }
+    }
+    private void setExpenseAction(){
+        type = -1;
+        income.setSelected(false);
+        category_combobox.getItems().clear();
+        for (Categories i: Main.getExpenseCategories()){
+            category_combobox.getItems().add(i.getName());
+        }
+    }
+
+    private String getCurrencyLetter(){
+        String CURRENCY = "";
+        switch (mainFrameControl.getSelectedWallet().getCurrency()){
+            case "Vietnam Dong": CURRENCY = "₫"; break;
+            case "US Dollar": CURRENCY = "$"; break;
+            case "Pound": CURRENCY = "£"; break;
+            case "Euro": CURRENCY = "€"; break;
+            case "Yuan Renminbi": CURRENCY = "¥"; break;
+            case "Yen": CURRENCY = "JP¥"; break;
+            case "Won": CURRENCY = "₩"; break;
+        }
+        return CURRENCY;
     }
 
     private void setSave_button(){
@@ -136,13 +167,15 @@ public class AddTransactionControl {
                 amount = 0 - amount;
             if (category != null && date != null) {
                 Transactions newTransaction = new Transactions(amount, mainFrameControl.getSelectedWallet().getCurrency(), category, note, date);
-                // Now create new transaction
-                System.out.println(newTransaction);
-                // Update balance
+
                 mainFrameControl.getSelectedWallet().addNewTransaction(newTransaction);
                 mainFrameControl.setPrevious_transaction(newTransaction);
                 mainFrameControl.setTransactionSelectingDate(date);
+                if (edit_mode){
+                    mainFrameControl.getSelectedWallet().getTransactionList().remove(editingTransaction);
+                }
                 mainFrameControl.refreshView();
+
 
                 thisStage.close();
             }
@@ -152,8 +185,61 @@ public class AddTransactionControl {
 
     }
 
+    public void setData(Transactions t){
+        save_button.setText("Save");
+        delete_btn.setVisible(true);
+        edit_mode = true;
+        title.setText("Edit Transaction");
+        amount_textfield.setText(String.valueOf(Math.abs(t.getAmount())));
+        currency_label.setText(getCurrencyLetter());
+
+
+
+        for (Categories c: Main.getExpenseCategories()){
+            if (c.getName().equals(t.getCategory())) {
+                category_icon.setImage(c.getIcon());
+                break;
+            }
+        }
+        for (Categories c: Main.getIncomeCategories()){
+            if (c.getName().equals(t.getCategory())) {
+                category_icon.setImage(c.getIcon());
+                break;
+            }
+        }
+
+        income.setSelected(false);
+        expense.setSelected(false);
+
+        if (t.getAmount() < 0){
+            expense.setSelected(true);
+            setExpenseAction();
+        }
+        else{
+            income.setSelected(true);
+            setIncomeAction();
+        }
+
+        note_textfield.setText(t.getNote());
+        date_datepicker.setValue(t.getDate());
+
+        category_combobox.getSelectionModel().select(t.getCategory());
+    }
+
 
     private void setCancel_button(){
         thisStage.close();
+    }
+
+    private void setDelete_btn(){
+        Alert alert = new Alert(Alert.AlertType.WARNING, "DELETE THIS TRANSACTION?", ButtonType.YES, ButtonType.CANCEL);
+        Optional<ButtonType> pressed = alert.showAndWait();
+        ButtonType button = pressed.orElse(ButtonType.CANCEL);
+        if (button == ButtonType.YES){
+            mainFrameControl.getSelectedWallet().getTransactionList().remove(editingTransaction);
+            mainFrameControl.refreshView();
+            thisStage.close();
+        }
+
     }
 }
