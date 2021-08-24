@@ -19,7 +19,7 @@ import java.util.Locale;
 public class Utils {
 
 
-    public static NumberFormat formatter = new DecimalFormat("#,##0.000");
+    public static NumberFormat formatter = new DecimalFormat("#,##0.00");
 
 
     public static String convertCurrency(String inputCurrencyName, Double inputAmount,

@@ -35,12 +35,12 @@
          <children>
             <Label text="AMOUNT">
                <font>
-                  <Font size="15.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
             </Label>
             <Label text="RATE" GridPane.rowIndex="2">
                <font>
-                  <Font size="15.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
             </Label>
             <TextField fx:id="amount_tf" prefHeight="45.0" prefWidth="280.0" promptText="Enter amount" style="-fx-border-color: #f1f1f1;" GridPane.rowIndex="1">
@@ -50,17 +50,17 @@
             </TextField>
             <Label text="DURING TIME" GridPane.rowIndex="4">
                <font>
-                  <Font size="15.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
             </Label>
             <Label text="TYPE" GridPane.rowIndex="7">
                <font>
-                  <Font size="15.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
             </Label>
             <Label text="TIME MODE" GridPane.rowIndex="9">
                <font>
-                  <Font size="15.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
             </Label>
             <TextField fx:id="rate_tf" prefHeight="45.0" prefWidth="280.0" promptText="Enter amount" style="-fx-border-color: #f1f1f1;" GridPane.rowIndex="3">
@@ -88,8 +88,8 @@
                   <DatePicker fx:id="enddate_dp" prefHeight="49.0" prefWidth="270.0" promptText="Pick a date" style="-fx-background-color: white; -fx-font-size: 15;" />
                </children>
             </HBox>
-            <ComboBox fx:id="type_cbb" prefHeight="72.0" prefWidth="365.0" style="-fx-border-color: #f1f1f1;" GridPane.rowIndex="8" />
-            <ComboBox fx:id="timemode_cbb" prefHeight="72.0" prefWidth="365.0" style="-fx-border-color: #f1f1f1;" GridPane.rowIndex="10" />
+            <ComboBox fx:id="type_cbb" prefHeight="72.0" prefWidth="365.0" style="-fx-border-color: #f1f1f1;" stylesheets="@../css.css" GridPane.rowIndex="8" />
+            <ComboBox fx:id="timemode_cbb" prefHeight="72.0" prefWidth="365.0" style="-fx-border-color: #f1f1f1;" stylesheets="@../css.css" GridPane.rowIndex="10" />
          </children>
       </GridPane>
       <Label layoutX="322.0" layoutY="50.0" text="Interest Rate Calculator">
@@ -104,10 +104,10 @@
       </Button>
       <Label layoutX="529.0" layoutY="136.0" text="RESULT">
          <font>
-            <Font size="15.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="result_tf" editable="false" layoutX="529.0" layoutY="173.0" prefHeight="45.0" prefWidth="280.0" promptText="Enter amount" style="-fx-background-color: white;">
+      <TextField fx:id="result_tf" editable="false" layoutX="529.0" layoutY="173.0" prefHeight="45.0" prefWidth="280.0" promptText="0" style="-fx-background-color: white;">
          <font>
             <Font size="20.0" />
          </font>

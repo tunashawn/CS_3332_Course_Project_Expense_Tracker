@@ -23,12 +23,11 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="545.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="55.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox maxWidth="80.0" prefHeight="200.0" prefWidth="80.0">
                      <children>
-                        <Button fx:id="wallet_button" mnemonicParsing="false" prefHeight="75.0" prefWidth="87.0" style="-fx-background-color: transparent;">
+                        <Button fx:id="wallet_button" mnemonicParsing="false" prefHeight="75.0" prefWidth="80.0" style="-fx-background-color: transparent;">
                            <graphic>
                               <ImageView fx:id="wallet_icon" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -64,15 +63,6 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="planning_button" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: transparent;">
-                           <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0">
-                                 <image>
-                                    <Image url="@../icons/planning_icon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
                         <Button fx:id="more_button" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: transparent;">
                            <graphic>
                               <ImageView fitHeight="40.0" fitWidth="40.0">
@@ -84,7 +74,6 @@
                         </Button>
                      </children>
                   </VBox>
-                  <HBox alignment="CENTER" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <VBox maxWidth="1.7976931348623157E308">

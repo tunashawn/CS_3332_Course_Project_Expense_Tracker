@@ -37,7 +37,7 @@
                         <Font size="15.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets />
                      </VBox.margin>
                      <padding>
                         <Insets left="30.0" />
@@ -55,7 +55,7 @@
                         <Font size="15.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets />
                      </VBox.margin>
                      <padding>
                         <Insets left="30.0" />
@@ -73,7 +73,7 @@
                         <Font size="15.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets />
                      </VBox.margin>
                      <padding>
                         <Insets left="35.0" />
