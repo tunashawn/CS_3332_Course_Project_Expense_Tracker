@@ -30,23 +30,16 @@ public class MainFrameControl {
     @FXML
     Button report_button;
     @FXML
-    Button planning_button;
-    @FXML
     Button more_button;
     @FXML
     ImageView wallet_icon;
     @FXML
     Label title_label;
     @FXML
-    AnchorPane content_panel;
-    @FXML
     Pane detail_pane;
 
-    @FXML
-    AnchorPane root;
 
     private ArrayList<Wallets> walletList = new ArrayList<>();
-    private ArrayList<Transactions> transactionsOfSelectedWallet = new ArrayList<>();
     private ArrayList<Categories> categories = new ArrayList<>();
     private Wallets selectedWallet;
     private String selecting_view = "";
@@ -65,8 +58,6 @@ public class MainFrameControl {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public void showStage() {
@@ -100,9 +91,8 @@ public class MainFrameControl {
         report_button.setOnAction(event -> openReportView(selectedWallet));
         report_button.setTooltip(Utils.getToolTip("Reports"));
 
-        planning_button.setTooltip(Utils.getToolTip("Planning"));
-
-        more_button.setTooltip(Utils.getToolTip("More"));
+        more_button.setOnAction(event -> openToolsView());
+        more_button.setTooltip(Utils.getToolTip("Tools"));
 
     }
 
@@ -127,8 +117,7 @@ public class MainFrameControl {
         if (selectedWallet != null) {
             AddTransactionControl addTransactionControl = new AddTransactionControl(this);
             addTransactionControl.showStage();
-        }
-        else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.NONE, "PLEASE CREATE A WALLET BEFORE USING THIS FUNCTION!", ButtonType.OK);
             alert.setTitle("ERROR!");
 
@@ -167,6 +156,20 @@ public class MainFrameControl {
             detail_pane.getChildren().add(pane);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void openToolsView(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/sample/views/ToolsView.fxml"));
+            ToolsViewControl e = new ToolsViewControl();
+            fxmlLoader.setController(e);
+            AnchorPane pane = fxmlLoader.load();
+            detail_pane.getChildren().clear();
+            detail_pane.getChildren().add(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -211,9 +214,16 @@ public class MainFrameControl {
     }
 
 
-
     public ArrayList<Categories> getCategories() {
         return categories;
+    }
+
+    public void addNewWallet(Wallets w) {
+        walletList.add(w);
+    }
+
+    public Wallets getSelectedWallet() {
+        return selectedWallet;
     }
 
     public void setSelectedWallet(Wallets w) {
@@ -226,24 +236,16 @@ public class MainFrameControl {
         }
     }
 
-    public void addNewWallet(Wallets w) {
-        walletList.add(w);
-    }
-
-    public Wallets getSelectedWallet() {
-        return selectedWallet;
-    }
-
     public String getSelecting_view() {
         return selecting_view;
     }
 
-    public void setPrevious_transaction(Transactions t) {
-        previous_transaction = t;
-    }
-
     public Transactions getPrevious_transaction() {
         return previous_transaction;
+    }
+
+    public void setPrevious_transaction(Transactions t) {
+        previous_transaction = t;
     }
 
     public void refreshView() {
