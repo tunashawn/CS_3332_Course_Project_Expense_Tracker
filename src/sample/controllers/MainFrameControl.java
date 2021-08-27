@@ -53,7 +53,7 @@ public class MainFrameControl {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/views/MainFrame.fxml"));
             loader.setController(this);
             thisStage.setScene(new Scene(loader.load()));
-            thisStage.setTitle("Expend Tracker");
+            thisStage.setTitle("Expense Tracker");
             thisStage.getIcons().add(new Image("/sample/icons/app_logo.png"));
         } catch (IOException e) {
             e.printStackTrace();
