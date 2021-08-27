@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class ToolsViewControl {
 
-    @FXML JFXButton exchanger_jbtn, interest_rate_jbtn;
+    @FXML JFXButton exchanger_jbtn, interest_rate_jbtn, debt_jbtn;
     @FXML AnchorPane detail_panel;
 
     public ToolsViewControl() {
@@ -19,6 +19,7 @@ public class ToolsViewControl {
     private void initialize(){
         exchanger_jbtn.setOnAction(event -> OpenExchanger());
         interest_rate_jbtn.setOnAction(event -> OpenInterestRate());
+        debt_jbtn.setOnAction(event -> OpenDebt());
     }
 
     private void OpenExchanger(){
@@ -41,6 +42,18 @@ public class ToolsViewControl {
             fxmlLoader.setLocation(getClass().getResource("/sample/views/InterestRateView.fxml"));
             InterestRateViewControl e = new InterestRateViewControl();
             fxmlLoader.setController(e);
+            AnchorPane pane = fxmlLoader.load();
+            detail_panel.getChildren().clear();
+            detail_panel.getChildren().add(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void OpenDebt(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/sample/views/DebtView.fxml"));
             AnchorPane pane = fxmlLoader.load();
             detail_panel.getChildren().clear();
             detail_panel.getChildren().add(pane);

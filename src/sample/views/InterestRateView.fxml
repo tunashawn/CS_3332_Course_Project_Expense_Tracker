@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane layoutX="129.0" layoutY="125.0" prefHeight="536.0" prefWidth="321.0">
@@ -63,7 +62,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="rate_tf" prefHeight="45.0" prefWidth="280.0" promptText="Enter amount" style="-fx-border-color: #f1f1f1;" GridPane.rowIndex="3">
+            <TextField fx:id="rate_tf" prefHeight="45.0" prefWidth="280.0" promptText="Enter rate" style="-fx-border-color: #f1f1f1;" GridPane.rowIndex="3">
                <font>
                   <Font size="20.0" />
                </font>
@@ -88,8 +87,8 @@
                   <DatePicker fx:id="enddate_dp" prefHeight="49.0" prefWidth="270.0" promptText="Pick a date" style="-fx-background-color: white; -fx-font-size: 15;" />
                </children>
             </HBox>
-            <ComboBox fx:id="type_cbb" prefHeight="72.0" prefWidth="365.0" style="-fx-border-color: #f1f1f1;" stylesheets="@../css.css" GridPane.rowIndex="8" />
-            <ComboBox fx:id="timemode_cbb" prefHeight="72.0" prefWidth="365.0" style="-fx-border-color: #f1f1f1;" stylesheets="@../css.css" GridPane.rowIndex="10" />
+            <ComboBox fx:id="type_cbb" prefHeight="72.0" prefWidth="365.0" style="-fx-font-size: 15; -fx-background-color: #f1f1f1;" GridPane.rowIndex="8" />
+            <ComboBox fx:id="timemode_cbb" prefHeight="72.0" prefWidth="365.0" style="-fx-font-size: 15; -fx-background-color: #f1f1f1;" GridPane.rowIndex="10" />
          </children>
       </GridPane>
       <Label layoutX="322.0" layoutY="50.0" text="Interest Rate Calculator">
@@ -97,17 +96,42 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <Button fx:id="calculate_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="564.0" layoutY="274.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="210.0" style="-fx-background-color: #3dba71;" text="Calculate" textFill="WHITE">
+      <Button fx:id="calculate_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="585.0" layoutY="591.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="210.0" style="-fx-background-color: #3dba71;" text="Calculate" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <Label layoutX="529.0" layoutY="136.0" text="RESULT">
+      <Label layoutX="549.0" layoutY="270.0" text="TOTAL">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="result_tf" editable="false" layoutX="529.0" layoutY="173.0" prefHeight="45.0" prefWidth="280.0" promptText="0" style="-fx-background-color: white;">
+      <TextField fx:id="result_tf" editable="false" layoutX="549.0" layoutY="307.0" prefHeight="45.0" prefWidth="280.0" promptText="0" style="-fx-background-color: white;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="653.0" layoutY="219.0" text="RESULT">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="549.0" layoutY="371.0" text="INTEREST AMOUNT">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="interest_amount" editable="false" layoutX="549.0" layoutY="408.0" prefHeight="45.0" prefWidth="280.0" promptText="0" style="-fx-background-color: white;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="549.0" layoutY="468.0" text="Number of periods">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="num_of_period" editable="false" layoutX="549.0" layoutY="505.0" prefHeight="45.0" prefWidth="280.0" promptText="0" style="-fx-background-color: white;">
          <font>
             <Font size="20.0" />
          </font>
