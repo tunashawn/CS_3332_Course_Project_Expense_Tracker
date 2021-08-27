@@ -5,11 +5,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import sample.models.InterestRate;
+import sample.utils.Utils;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class InterestRateViewControl {
-    @FXML TextField amount_tf, rate_tf, result_tf;
+    @FXML TextField amount_tf, rate_tf, result_tf, interest_amount, num_of_period;
     @FXML DatePicker startdate_dp, enddate_dp;
     @FXML ComboBox<String> type_cbb, timemode_cbb;
     @FXML Button calculate_btn;
@@ -26,8 +30,22 @@ public class InterestRateViewControl {
 
 
     private void Calculate(){
-        String amount = amount_tf.getText();
+        try {
+            double amount = Double.parseDouble(amount_tf.getText());
+            double rate = Double.parseDouble(rate_tf.getText());
+            LocalDate start_date = startdate_dp.getValue();
+            LocalDate end_date = enddate_dp.getValue();
+            String type = type_cbb.getSelectionModel().getSelectedItem();
+            String time_mode = timemode_cbb.getSelectionModel().getSelectedItem();
 
+            InterestRate result = Utils.calculateInterestRate(amount, rate,start_date,end_date,type,time_mode);
+            result_tf.setText(Utils.formatter.format(result.getAmount()));
+            interest_amount.setText(Utils.formatter.format(result.getInterest_amount()));
+            num_of_period.setText(String.valueOf(result.getPeriod()));
+
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
     }
 
 
