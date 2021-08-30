@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="convert_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="345.0" layoutY="479.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="210.0" style="-fx-background-color: #3dba71;" text="Convert" textFill="WHITE">
@@ -44,7 +43,7 @@
                <children>
                   <HBox alignment="CENTER" GridPane.columnIndex="1">
                      <children>
-                        <ComboBox fx:id="output_cbb" prefHeight="45.0" prefWidth="95.0" promptText="EUR" style="-fx-font-size: 15; -fx-background-color: white;" />
+                        <ComboBox fx:id="output_cbb" prefHeight="45.0" prefWidth="95.0" promptText="EUR" style="-fx-font-size: 15; -fx-background-color: #f1f1f1;" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER">
@@ -58,7 +57,7 @@
                   </HBox>
                   <HBox alignment="CENTER" GridPane.columnIndex="2">
                      <children>
-                        <TextField fx:id="output_tf" editable="false" prefHeight="45.0" prefWidth="210.0" style="-fx-font-size: 20;" />
+                        <TextField fx:id="output_tf" editable="false" prefHeight="45.0" prefWidth="210.0" style="-fx-font-size: 20; -fx-background-color: #f1f1f1;" />
                      </children>
                   </HBox>
                </children>
@@ -75,7 +74,7 @@
                <children>
                   <HBox alignment="CENTER" GridPane.columnIndex="1">
                      <children>
-                        <ComboBox fx:id="input_cbb" prefHeight="45.0" prefWidth="95.0" promptText="USD" style="-fx-font-size: 15; -fx-background-color: white;" />
+                        <ComboBox fx:id="input_cbb" prefHeight="45.0" prefWidth="95.0" promptText="USD" style="-fx-font-size: 15; -fx-background-color: #f1f1f1;" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER">
@@ -89,7 +88,7 @@
                   </HBox>
                   <HBox alignment="CENTER" GridPane.columnIndex="2">
                      <children>
-                        <TextField fx:id="input_tf" prefHeight="45.0" prefWidth="210.0" promptText="Enter amount" style="-fx-font-size: 20;" />
+                        <TextField fx:id="input_tf" prefHeight="45.0" prefWidth="210.0" promptText="Enter amount" style="-fx-font-size: 20; -fx-background-color: #f1f1f1;" />
                      </children>
                   </HBox>
                </children>

@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
@@ -49,8 +48,7 @@
             </HBox>
             <VBox alignment="TOP_CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Line endX="200.2928924560547" endY="0.2928932309150696" startX="-100.0" stroke="#6f6f6f" />
-                  <JFXComboBox fx:id="currency_combobox" maxWidth="300.0" prefHeight="26.0" prefWidth="300.0" promptText="Currency" style="-fx-font-size: 15;">
+                  <JFXComboBox fx:id="currency_combobox" maxWidth="300.0" prefHeight="45.0" prefWidth="300.0" promptText="Currency" style="-fx-font-size: 15; -fx-background-color: #f1f1f1;">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -59,13 +57,15 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="67.0" prefWidth="293.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Line endX="200.2928924560547" endY="0.2928932309150696" startX="-100.0" stroke="#6f6f6f" />
                   <Label prefHeight="18.0" prefWidth="300.0" text="Initial Balance">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
                   </Label>
-                  <TextField fx:id="balance" maxWidth="300.0" prefHeight="36.0" prefWidth="300.0" style="-fx-font-size: 20;">
+                  <TextField fx:id="balance" maxWidth="300.0" prefHeight="36.0" prefWidth="300.0" style="-fx-font-size: 20; -fx-background-color: #f1f1f1;">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -74,7 +74,7 @@
             </VBox>
             <HBox alignment="CENTER" GridPane.columnIndex="1">
                <children>
-                  <TextField fx:id="name_label" maxWidth="300.0" prefHeight="36.0" prefWidth="300.0" promptText="Enter name" style="-fx-font-size: 15;">
+                  <TextField fx:id="name_label" maxWidth="300.0" prefHeight="45.0" prefWidth="300.0" promptText="Enter name" style="-fx-font-size: 15; -fx-background-color: #f1f1f1;">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -174,7 +174,10 @@
             </HBox>
          </children>
       </GridPane>
-      <Label layoutX="235.0" layoutY="359.0" text="Select icon" />
+      <Label layoutX="235.0" layoutY="359.0" text="Select icon">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
       <Label layoutX="233.0" layoutY="39.0" text="Creat new wallet">
          <font>
             <Font name="System Bold" size="30.0" />

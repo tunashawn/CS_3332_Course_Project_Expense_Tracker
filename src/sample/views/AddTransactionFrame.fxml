@@ -67,7 +67,7 @@
                   </HBox>
                   <HBox alignment="CENTER" GridPane.columnIndex="1">
                      <children>
-                        <TextField fx:id="amount_textfield" maxHeight="0.0" maxWidth="200.0" minHeight="50.0" minWidth="280.0" prefHeight="50.0" prefWidth="250.0" promptText="Enter amount">
+                        <TextField fx:id="amount_textfield" maxHeight="0.0" maxWidth="200.0" minHeight="50.0" minWidth="280.0" prefHeight="50.0" prefWidth="250.0" promptText="Enter amount" style="-fx-background-color: #f1f1f1;">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -76,7 +76,7 @@
                   </HBox>
                   <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <ComboBox fx:id="category_combobox" maxHeight="0.0" maxWidth="200.0" minWidth="280.0" prefHeight="45.0" prefWidth="234.0" promptText="Select category" style="-fx-font-size: 15; -fx-font-weight: bold;" />
+                        <ComboBox fx:id="category_combobox" maxHeight="0.0" maxWidth="200.0" minWidth="280.0" prefHeight="45.0" prefWidth="234.0" promptText="Select category" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-background-color: #f1f1f1;" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" GridPane.rowIndex="3">
@@ -99,7 +99,7 @@
                   </HBox>
                   <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <TextField fx:id="note_textfield" maxHeight="0.0" maxWidth="200.0" minHeight="50.0" minWidth="280.0" prefHeight="50.0" prefWidth="250.0" promptText="Note...">
+                        <TextField fx:id="note_textfield" maxHeight="0.0" maxWidth="200.0" minHeight="50.0" minWidth="280.0" prefHeight="50.0" prefWidth="250.0" promptText="Note..." style="-fx-background-color: #f1f1f1;">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -108,7 +108,7 @@
                   </HBox>
                   <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
-                        <DatePicker fx:id="date_datepicker" maxHeight="30.0" maxWidth="280.0" minHeight="30.0" minWidth="280.0" prefHeight="30.0" prefWidth="280.0" promptText="Choose a date" style="-fx-font-size: 15; -fx-font-weight: bold;" />
+                        <DatePicker fx:id="date_datepicker" maxHeight="30.0" maxWidth="280.0" minHeight="30.0" minWidth="280.0" prefHeight="30.0" prefWidth="280.0" promptText="Choose a date" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-background-color: #f1f1f1;" />
                      </children>
                   </VBox>
                   <HBox alignment="CENTER">
