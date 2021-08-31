@@ -12,10 +12,14 @@ import javafx.stage.Stage;
 import sample.Main;
 import sample.models.Categories;
 import sample.models.Transactions;
+import sample.models.Wallets;
+import sample.utils.Utils;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.function.UnaryOperator;
 
 
 public class AddTransactionControl {
@@ -26,7 +30,7 @@ public class AddTransactionControl {
     @FXML Button delete_btn;
 
     @FXML TextField amount_textfield;
-    @FXML ComboBox<String> category_combobox;
+    @FXML ComboBox<String> category_combobox, wallet_cbb;
     @FXML TextField note_textfield;
     @FXML DatePicker date_datepicker;
     @FXML RadioButton income, expense;
@@ -75,23 +79,41 @@ public class AddTransactionControl {
     }
 
 
+    private DecimalFormat format = new DecimalFormat("#.0;-#.0");
+
     /**
      * The initialize() method allows you set setup your scene, adding actions, configuring nodes, etc.
      */
     @FXML
     private void initialize() throws IOException {
-        String CURRENCY = getCurrencyLetter();
+
+        for (Wallets wallets : mainFrameControl.getWalletsList()) {
+            wallet_cbb.getItems().add(wallets.getName());
+        }
+
+        wallet_cbb.getSelectionModel().select(mainFrameControl.getSelectedWallet().getName());
+
+        wallet_cbb.setOnAction(event -> setCurrencyForSelectedWallet());
+
+        String CURRENCY = getCurrencyLetter(mainFrameControl.getSelectedWallet().getCurrency());
+
         currency_label.setText(CURRENCY);
+
         warning.setVisible(false);
+
         cancel_button.setOnAction(event -> setCancel_button());
+
         save_button.setOnAction(event -> setSave_button());
+
         expense.setSelected(true);
+
         date_datepicker.setValue(LocalDate.now());
         if (mainFrameControl.getPrevious_transaction() != null){
             income.setSelected(mainFrameControl.getPrevious_transaction().getAmount() >= 0);
             expense.setSelected(mainFrameControl.getPrevious_transaction().getAmount() < 0);
             date_datepicker.setValue(mainFrameControl.getPrevious_transaction().getDate());
         }
+
         if (expense.isSelected()) {
             type = -1;
             category_combobox.setPromptText("Select category");
@@ -126,8 +148,19 @@ public class AddTransactionControl {
                 }
             }
         });
-        if (edit_mode)
+        if (edit_mode){
             setData(editingTransaction);
+
+        }
+    }
+
+    private void setCurrencyForSelectedWallet(){
+        for (Wallets wallets : mainFrameControl.getWalletsList()) {
+            if (wallets.getName().equals(wallet_cbb.getSelectionModel().getSelectedItem())){
+                currency_label.setText(getCurrencyLetter(wallets.getCurrency()));
+                break;
+            }
+        }
     }
 
     private void setIncomeAction(){
@@ -147,9 +180,9 @@ public class AddTransactionControl {
         }
     }
 
-    private String getCurrencyLetter(){
+    private String getCurrencyLetter(String currency){
         String CURRENCY = "";
-        switch (mainFrameControl.getSelectedWallet().getCurrency()){
+        switch (currency){
             case "Vietnam Dong": CURRENCY = "₫"; break;
             case "US Dollar": CURRENCY = "$"; break;
             case "Pound": CURRENCY = "£"; break;
@@ -170,13 +203,21 @@ public class AddTransactionControl {
             if (type == -1)
                 amount = 0 - amount;
             if (category != null && date != null) {
-                Transactions newTransaction = new Transactions(amount, mainFrameControl.getSelectedWallet().getCurrency(), category, note, date);
 
-                mainFrameControl.getSelectedWallet().addNewTransaction(newTransaction);
-                mainFrameControl.setPrevious_transaction(newTransaction);
-                mainFrameControl.setTransactionSelectingDate(date);
+                for (Wallets wallets : mainFrameControl.getWalletsList()) {
+                    if (wallets.getName().equals(wallet_cbb.getSelectionModel().getSelectedItem())) {
+                        Transactions newTransaction = new Transactions(amount, wallets.getCurrency(), category, note, date);
+                        wallets.addNewTransaction(newTransaction);
+                        mainFrameControl.setPrevious_transaction(newTransaction);
+                        mainFrameControl.setTransactionSelectingDate(date);
+                        break;
+                    }
+                }
+
+
+
                 if (edit_mode){
-                    mainFrameControl.getSelectedWallet().getTransactionList().remove(editingTransaction);
+                    mainFrameControl.getSelectedWallet().deleteATransaction(editingTransaction);
                 }
                 mainFrameControl.refreshView();
 
@@ -190,14 +231,19 @@ public class AddTransactionControl {
     }
 
     public void setData(Transactions t){
-        save_button.setText("Save");
-        delete_btn.setVisible(true);
-        edit_mode = true;
-        title.setText("Edit Transaction");
         amount_textfield.setText(String.valueOf(Math.abs(t.getAmount())));
-        currency_label.setText(getCurrencyLetter());
 
+        wallet_cbb.setDisable(true);
 
+        save_button.setText("Save");
+
+        delete_btn.setVisible(true);
+
+        edit_mode = true;
+
+        title.setText("Edit Transaction");
+
+        currency_label.setText(getCurrencyLetter(mainFrameControl.getSelectedWallet().getCurrency()));
 
         for (Categories c: Main.getExpenseCategories()){
             if (c.getName().equals(t.getCategory())) {
@@ -205,6 +251,7 @@ public class AddTransactionControl {
                 break;
             }
         }
+
         for (Categories c: Main.getIncomeCategories()){
             if (c.getName().equals(t.getCategory())) {
                 category_icon.setImage(c.getIcon());

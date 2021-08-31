@@ -263,4 +263,8 @@ public class MainFrameControl {
     public void setTransactionSelectingDate(LocalDate date) {
         trans_selecting_date = date;
     }
+
+    public ArrayList<Wallets> getWalletsList(){
+        return this.walletList;
+    }
 }
