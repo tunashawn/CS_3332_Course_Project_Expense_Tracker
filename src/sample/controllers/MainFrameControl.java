@@ -207,7 +207,6 @@ public class MainFrameControl {
                 }
             }
             setSelectedWallet(walletList.get(0));
-            walletList.forEach(System.out::println);
         } catch (Exception ex) {
             System.err.println("failed to read " + "Transaction Record.ser" + ", " + ex);
         }
