@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" maxHeight="543.0" maxWidth="400.0" minHeight="500.0" minWidth="400.0" prefHeight="543.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="root" maxHeight="615.0" maxWidth="400.0" minHeight="500.0" minWidth="400.0" prefHeight="615.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox layoutX="150.0" layoutY="131.0" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -40,12 +40,13 @@
                   </Button>
                </children>
             </HBox>
-            <GridPane prefHeight="444.0" prefWidth="400.0" style="-fx-background-color: white;">
+            <GridPane prefHeight="503.0" prefWidth="400.0" style="-fx-background-color: white;">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="85.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="323.0" minWidth="10.0" prefWidth="315.0" />
               </columnConstraints>
               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -56,7 +57,7 @@
                   <Insets />
                </VBox.margin>
                <children>
-                  <HBox alignment="CENTER" GridPane.rowIndex="2">
+                  <HBox alignment="CENTER" GridPane.rowIndex="3">
                      <children>
                         <ImageView fx:id="category_icon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -65,21 +66,21 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" GridPane.columnIndex="1">
+                  <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <TextField fx:id="amount_textfield" maxHeight="0.0" maxWidth="200.0" minHeight="50.0" minWidth="280.0" prefHeight="50.0" prefWidth="250.0" promptText="Enter amount" style="-fx-background-color: #f1f1f1;">
+                        <TextField fx:id="amount_textfield" maxHeight="50.0" maxWidth="280.0" minHeight="50.0" minWidth="280.0" prefHeight="50.0" prefWidth="280.0" promptText="Enter amount" style="-fx-background-color: #f1f1f1;">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </TextField>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <ComboBox fx:id="category_combobox" maxHeight="0.0" maxWidth="200.0" minWidth="280.0" prefHeight="45.0" prefWidth="234.0" promptText="Select category" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-background-color: #f1f1f1;" />
+                        <ComboBox fx:id="category_combobox" maxHeight="50.0" maxWidth="280.0" minWidth="280.0" prefHeight="50.0" prefWidth="280.0" promptText="Select category" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-background-color: #f1f1f1;" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" GridPane.rowIndex="3">
+                  <HBox alignment="CENTER" GridPane.rowIndex="4">
                      <children>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -88,7 +89,7 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" GridPane.rowIndex="4">
+                  <HBox alignment="CENTER" GridPane.rowIndex="5">
                      <children>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -97,21 +98,21 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
-                        <TextField fx:id="note_textfield" maxHeight="0.0" maxWidth="200.0" minHeight="50.0" minWidth="280.0" prefHeight="50.0" prefWidth="250.0" promptText="Note..." style="-fx-background-color: #f1f1f1;">
+                        <TextField fx:id="note_textfield" maxHeight="50.0" maxWidth="280.0" minHeight="50.0" minWidth="280.0" prefHeight="50.0" prefWidth="280.0" promptText="Note..." style="-fx-background-color: #f1f1f1;">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </TextField>
                      </children>
                   </HBox>
-                  <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <children>
-                        <DatePicker fx:id="date_datepicker" maxHeight="30.0" maxWidth="280.0" minHeight="30.0" minWidth="280.0" prefHeight="30.0" prefWidth="280.0" promptText="Choose a date" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-background-color: #f1f1f1;" />
+                        <DatePicker fx:id="date_datepicker" maxHeight="50.0" maxWidth="280.0" minHeight="30.0" minWidth="280.0" prefHeight="50.0" prefWidth="280.0" promptText="Choose a date" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-background-color: #f1f1f1;" />
                      </children>
                   </VBox>
-                  <HBox alignment="CENTER">
+                  <HBox alignment="CENTER" GridPane.rowIndex="1">
                      <children>
                         <Label fx:id="currency_label" text="VND">
                            <font>
@@ -120,7 +121,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
                         <RadioButton fx:id="income" mnemonicParsing="false" text="Income">
                            <font>
@@ -137,13 +138,27 @@
                         </RadioButton>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" GridPane.rowIndex="1">
+                  <HBox alignment="CENTER" GridPane.rowIndex="2">
                      <children>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/switch_on_64px.png" />
                            </image>
                         </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" GridPane.columnIndex="1">
+                     <children>
+                        <ComboBox fx:id="wallet_cbb" maxHeight="50.0" maxWidth="280.0" minWidth="280.0" prefHeight="50.0" prefWidth="280.0" promptText="Select Wallet" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-background-color: #f1f1f1;" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label fx:id="currency_label1" text="Wallet">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
                      </children>
                   </HBox>
                </children>
