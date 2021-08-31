@@ -29,9 +29,11 @@ public class Wallets implements Serializable {
     }
 
     public void addNewTransaction(Transactions t){
-        balance += t.getAmount();
+        if (balance + t.getAmount() >= 0) {
+            balance += t.getAmount();
 
-        transactionList.add(t);
+            transactionList.add(t);
+        }
     }
 
     public String getName() {

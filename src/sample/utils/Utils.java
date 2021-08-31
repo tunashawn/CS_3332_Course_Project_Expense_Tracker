@@ -71,8 +71,7 @@ public class Utils {
                 list.add(t);
             }
             trans_by_month.add(list);
-            System.out.println("list:");
-            System.out.println(list);
+
         }
         return trans_by_month;
     }
@@ -102,8 +101,7 @@ public class Utils {
                 list.add(t);
             }
             trans_by_week.add(list);
-            System.out.println("list:");
-            System.out.println(list);
+
         }
         return trans_by_week;
     }
@@ -249,7 +247,7 @@ public class Utils {
     }
 
     public static double compoundInterest(double amount, double rate, int n, int time){
-        System.out.println(n);
+
         for (int i = 0; i < n; i++) {
             amount *= (1 + rate/100);
         }
